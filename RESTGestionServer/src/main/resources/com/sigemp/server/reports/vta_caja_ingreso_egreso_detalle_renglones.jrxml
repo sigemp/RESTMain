@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_caja_ingreso_egreso_detalle_renglones" pageWidth="500" pageHeight="200" orientation="Landscape" columnWidth="500" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4f88ce04-ccd9-48a4-92a9-5d1f52843547">
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <parameter name="CAJ_ID" class="java.lang.Integer" isForPrompting="false"/>
+    <queryString>
+		<![CDATA[select vta_cajr.mc_id,vta_mc.des,abs(vta_cajr.tot) as tot,vta_cajr.tipo,vta_cajr.obs
+from vta_cajr,vta_mc
+where vta_cajr.mc_id = vta_mc.mc_id
+  AND vta_cajr.caj_id = $P!{CAJ_ID}]]>
+    </queryString>
+    <field name="mc_id" class="java.lang.Integer"/>
+    <field name="des" class="java.lang.String"/>
+    <field name="tot" class="java.math.BigDecimal"/>
+    <field name="tipo" class="java.lang.Integer"/>
+    <field name="obs" class="java.lang.String"/>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band />
+    </title>
+    <pageHeader>
+        <band />
+    </pageHeader>
+    <columnHeader>
+        <band height="13" >
+            <rectangle radius="4">
+                <reportElement key="rectangle-1" x="0" y="0" width="497" height="13" backcolor="#999999" uuid="c5e268e2-77cb-45aa-9eb1-d5dbf0cc5d29"/>
+            </rectangle>
+            <staticText>
+                <reportElement key="staticText-1" x="27" y="0" width="41" height="13" forecolor="#FFFFFF" uuid="2e89d383-7066-42a9-9c58-4535f2566f26"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[Codigo]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-2" x="73" y="0" width="152" height="13" forecolor="#FFFFFF" uuid="98926d97-8f7b-42d0-9347-a4ae2d2f750e"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[Decscripcion]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-3" x="230" y="0" width="50" height="13" forecolor="#FFFFFF" uuid="53712c77-80b9-4894-a7d0-28c729cc0dcc"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-4" x="285" y="0" width="212" height="13" forecolor="#FFFFFF" uuid="b35421b3-76f7-49a4-9ac1-8aa190c786a3"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[Observaciones por medio de cobro]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="14" >
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="27" y="0" width="41" height="13" uuid="1e78e5a5-58ba-4749-ac7f-fb884edf5efb"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{mc_id}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="73" y="0" width="152" height="13" uuid="fea39d2f-08b1-4d4a-9008-01f4d1fd3e03"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{des}]]></textFieldExpression>
+            </textField>
+            <textField pattern="##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="230" y="0" width="50" height="13" uuid="cfafd1c3-9e49-4391-acb5-71b84bbfb28d"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tot}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="285" y="0" width="212" height="13" uuid="cf2ab857-553a-4864-bec2-09056836444a"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band />
+    </columnFooter>
+    <pageFooter>
+        <band />
+    </pageFooter>
+    <summary>
+        <band />
+    </summary>
+</jasperReport>

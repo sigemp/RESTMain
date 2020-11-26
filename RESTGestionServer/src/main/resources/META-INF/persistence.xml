@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="CustomerService" transaction-type="JTA">
+    <jta-data-source>jdbc/gestionTestServiceResource</jta-data-source>
+    <!--
+<jta-data-source>jdbc/GestionServiceResource</jta-data-source>
+
+        <persistence-unit name="gestionPU" transaction-type="RESOURCE_LOCAL"> 
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        -->
+    <class>com.sigemp.gestion.server.entity.GsyActividad</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaVta</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCpg</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCajr</class>
+    <class>com.sigemp.gestion.shared.entity.GsyTiposcomprobantes</class>
+    <class>com.sigemp.gestion.shared.entity.GsyPaquetemap</class>
+    <class>com.sigemp.gestion.shared.entity.GsyContadorestipos</class>
+    <class>com.sigemp.gestion.shared.entity.GsyContadores</class>
+    <class>com.sigemp.gestion.shared.entity.StkArtdescuentos</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVta</class>
+    <class>com.sigemp.gestion.shared.entity.GsyPers</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaTiponegociodtorubro</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobM</class>
+    <class>com.sigemp.gestion.shared.entity.StkStk</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobLoteR</class>
+    <class>com.sigemp.gestion.shared.entity.GsyUsuariosroles</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVtar</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaRepartidor</class>
+    <class>com.sigemp.gestion.shared.entity.GsyProv</class>
+    <class>com.sigemp.gestion.shared.entity.StkArtbonificacion</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVen</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCob</class>
+    <class>com.sigemp.gestion.shared.entity.StkDep</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVtap</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVtaAlicuota</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaMotivonoventa</class>
+    <class>com.sigemp.gestion.shared.entity.GsyVersion</class>
+    <class>com.sigemp.gestion.shared.entity.StkMv</class>
+    <class>com.sigemp.gestion.shared.entity.GsyRolesr</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCtadtomarca</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaRuta</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaMovil</class>
+    <class>com.sigemp.gestion.shared.entity.StkMvr</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVtaTributo</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobr</class>
+    <class>com.sigemp.gestion.shared.entity.GsyPais</class>
+    <class>com.sigemp.gestion.shared.entity.GsyConf</class>
+    <class>com.sigemp.gestion.shared.entity.GsyLoc</class>
+    <class>com.sigemp.gestion.shared.entity.GsyTiva</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCaj</class>
+    <class>com.sigemp.gestion.shared.entity.VtaAfe</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCierres</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCpgr</class>
+    <class>com.sigemp.gestion.shared.entity.StkPArtbonHistorial</class>
+    <class>com.sigemp.gestion.shared.entity.VtaEsthistorial</class>
+    <class>com.sigemp.gestion.shared.entity.GsyEstcivil</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCajConcepto</class>
+    <class>com.sigemp.gestion.shared.entity.StkPArtbon</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobT</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCtadtorubro</class>
+    <class>com.sigemp.gestion.shared.entity.VtaVtag</class>
+    <class>com.sigemp.gestion.shared.entity.VtaMc</class>
+    <class>com.sigemp.gestion.shared.entity.VtaTarjetas</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobLote</class>
+    <class>com.sigemp.gestion.shared.entity.GsyUser</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCta</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaTiponegocio</class>
+    <class>com.sigemp.gestion.shared.entity.StkDepositos</class>
+    <class>com.sigemp.gestion.shared.entity.VtaCobC</class>
+    <class>com.sigemp.gestion.shared.entity.GsyCiva</class>
+    <class>com.sigemp.gestion.shared.entity.GsyTdoc</class>
+    <class>com.sigemp.gestion.shared.entity.StkMar</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaTiponoventa</class>
+    <class>com.sigemp.gestion.shared.entity.StkInventarios</class>
+    <class>com.sigemp.gestion.shared.entity.StkArtcod</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaVtar</class>
+    <class>com.sigemp.gestion.shared.entity.GsyRoles</class>
+    <class>com.sigemp.gestion.shared.entity.VtaBancos</class>
+    <class>com.sigemp.gestion.shared.entity.VtaEventos</class>
+    <class>com.sigemp.gestion.shared.entity.StkPArtbona</class>
+    <class>com.sigemp.gestion.shared.entity.GsyAuditoria</class>
+    <class>com.sigemp.gestion.shared.entity.VtaEst</class>
+    <class>com.sigemp.gestion.shared.entity.PvtaEntrega</class>
+    <class>com.sigemp.gestion.shared.entity.PrvPrv</class>
+    <class>com.sigemp.gestion.shared.entity.StkArt</class>
+    <class>com.sigemp.gestion.shared.entity.GsySuc</class>
+    <class>com.sigemp.gestion.shared.entity.StkInventariosr</class>
+    <class>com.sigemp.gestion.shared.entity.StkPArtbonb</class>
+    <class>com.sigemp.gestion.shared.entity.GsyTalonarios</class>
+    <properties>
+      <property name="eclipselink.logging.timestamp" value="false"/>
+      <property name="eclipselink.logging.thread" value="false"/>
+      <property name="eclipselink.logging.session" value="false"/>
+      <property name="eclipselink.logging.exceptions" value="false"/>
+      <property name="eclipselink.logging.level" value="FINEST"/>
+      <property name="eclipselink.logging.level.ejb_or_metadata" value="WARNING"/>
+      <property name="eclipselink.target-database" value="PostgreSQL"/>
+      <!--<property name="eclipselink.ddl-generation" value="create-tables"/>-->
+      <!-- Coneccion para base local 
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>             
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.target-server" value="SunAS9"/> 
+            
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/emilio-2018-02-08"/>
+            <property name="javax.persistence.jdbc.password" value="post"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="eclipselink.id-validation" value="NULL"/>
+            -->
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.1.final using JasperReports Library version 5.5.2  -->
+<!-- 2016-05-02T18:17:15 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a4080a3-fc96-42f1-8a2c-d4ac6c8fe111">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="183"/>
+    <parameter name="EMPRESA_DATOS1" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="EMPRESA_NOMBRE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PARAMETRO_WHERE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[" and fecdesde between '2010-09-01' and '2010-09-30'"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PARAMETRO_CONDICION" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[]]>
+    </queryString>
+    <field name="cntBultos" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[cntBultos]]></fieldDescription>
+    </field>
+    <field name="desRubro" class="java.lang.String">
+        <fieldDescription><![CDATA[desRubro]]></fieldDescription>
+    </field>
+    <field name="rubroId" class="java.lang.Integer">
+        <fieldDescription><![CDATA[rubroId]]></fieldDescription>
+    </field>
+    <field name="total" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[total]]></fieldDescription>
+    </field>
+    <variable name="SUMA_TOTAL" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[((BigDecimal)$F{total}).doubleValue()]]></variableExpression>
+    </variable>
+    <variable name="SUMA_BULTOS" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[((BigDecimal)$F{cntBultos}).doubleValue()]]></variableExpression>
+    </variable>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band height="26" />
+    </title>
+    <pageHeader>
+        <band height="103" >
+            <rectangle radius="7">
+                <reportElement key="rectangle-4" x="0" y="16" width="555" height="25" uuid="2d0cdb30-7f11-4f7c-80a4-74d1d7064c2e"/>
+            </rectangle>
+            <rectangle radius="7">
+                <reportElement key="rectangle-7" x="0" y="42" width="555" height="30" uuid="fb6b0e95-f0ba-4bdd-bb48-66ceb6995387"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-6" x="346" y="0" width="209" height="14" uuid="b52bf661-0570-4558-bf52-ed0ff3cbc02b"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-5" x="0" y="0" width="111" height="14" uuid="e002f578-56ec-44d9-8b1b-934d4958dac7"/>
+            </rectangle>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-5" x="5" y="16" width="125" height="25" uuid="3868abb9-760c-4a24-b95a-2eb2a2f42ad1"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true" isItalic="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_NOMBRE}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-3" x="363" y="0" width="185" height="14" forecolor="#000000" uuid="25806eee-ddea-406c-be5a-bd78bb10e1b9"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER} + " de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-14" x="5" y="42" width="543" height="30" forecolor="#000000" uuid="13ea2dd4-e412-4727-9b5d-334640407dca"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="23"/>
+                </textElement>
+                <text><![CDATA[Ventas por Rubro]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-6" x="346" y="16" width="202" height="25" uuid="dfccb7ca-4528-4b3d-8342-168b851b3508"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_DATOS1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-2" x="5" y="0" width="104" height="14" forecolor="#000000" uuid="6375df3e-bfd4-435a-a2df-465bf36f05ae"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-1" x="2" y="75" width="553" height="26" uuid="3b95a980-28c1-4dd7-9d1e-8f967c514367"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{PARAMETRO_CONDICION}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="26" >
+            <staticText>
+                <reportElement mode="Transparent" x="0" y="0" width="37" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="d692b15d-628f-498f-ae10-242ae255b645"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[ID Rubro]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="37" y="0" width="144" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="f640aa35-959f-4b97-bafe-92850d36ec34"/>
+                <textElement verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Descripcion]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="186" y="0" width="48" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="55d24386-a1fc-4e00-ba1f-3b502ed1a33a"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Bultos]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="240" y="0" width="64" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="d2c12351-c943-462c-865b-eb3bd31aee9e"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="13" >
+            <textField>
+                <reportElement x="0" y="0" width="37" height="13" uuid="e11796da-4929-495b-9694-110f1c944d1b"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{rubroId}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="40" y="0" width="141" height="13" uuid="2e18a2da-6160-42aa-8228-4081cb5a1941"/>
+                <textElement>
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{desRubro}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="186" y="0" width="48" height="13" uuid="44c93bc5-90b2-40ec-9a8f-ac95b960b42e"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cntBultos}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)">
+                <reportElement x="240" y="0" width="64" height="13" uuid="d28e8e3a-2e11-4fd2-b9d7-f4e298ccf085"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="11" />
+    </columnFooter>
+    <pageFooter>
+        <band height="13" >
+            <textField pattern="###0.00;(###0.00)" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="240" y="0" width="64" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="527d55bb-7870-4ac1-9ecf-3afe2e6b11c4"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_TOTAL}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="186" y="0" width="48" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="5d2cd648-34da-42ef-9e26-e03f8103aadb"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_BULTOS}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="5" y="0" width="37" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="c73abc57-e183-4009-8074-b39d8de86172"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Totales:]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="22" />
+    </summary>
+</jasperReport>

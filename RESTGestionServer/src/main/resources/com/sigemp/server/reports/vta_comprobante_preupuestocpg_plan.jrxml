@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_comprobante_preupuestocpg_plan" columnCount="2" pageWidth="595" pageHeight="255" orientation="Landscape" columnWidth="297" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <parameter name="PRE_ID" class="java.lang.Integer" isForPrompting="false">
+        <defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[SELECT pre_id,cpg_id || '-' || des as des,entrega,cuotas,impcuo,total
+FROM vta_tmppreplan
+WHERE pre_id = $P!{PRE_ID}
+LIMIT 16]]>
+    </queryString>
+    <field name="pre_id" class="java.lang.Integer"/>
+    <field name="des" class="java.lang.String"/>
+    <field name="entrega" class="java.math.BigDecimal"/>
+    <field name="cuotas" class="java.lang.Integer"/>
+    <field name="impcuo" class="java.math.BigDecimal"/>
+    <field name="total" class="java.math.BigDecimal"/>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band />
+    </title>
+    <pageHeader>
+        <band />
+    </pageHeader>
+    <columnHeader>
+        <band height="14" >
+            <staticText>
+                <reportElement key="staticText-1" positionType="Float" x="0" y="0" width="135" height="13"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Codicion de Pago]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-2" positionType="Float" x="136" y="0" width="53" height="13"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Entrega]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-3" positionType="Float" x="190" y="0" width="36" height="13"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Cuotas]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-4" positionType="Float" x="227" y="0" width="55" height="13"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center"/>
+                <text><![CDATA[Imp Cuota]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="12" >
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" isPrintRepeatedValues="false" x="0" y="0" width="135" height="12"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{des}]]></textFieldExpression>
+            </textField>
+            <textField pattern="##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="136" y="0" width="53" height="12"/>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{entrega}]]></textFieldExpression>
+            </textField>
+            <textField pattern="##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="227" y="0" width="55" height="12">
+                    <printWhenExpression><![CDATA[$F{cuotas} != 0]]></printWhenExpression>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Top">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{impcuo}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0;-###0" isBlankWhenNull="false">
+                <reportElement key="textField" x="190" y="0" width="36" height="12">
+                    <printWhenExpression><![CDATA[$F{cuotas} != 0]]></printWhenExpression>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression class="java.lang.Integer"><![CDATA[$F{cuotas}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band />
+    </columnFooter>
+    <pageFooter>
+        <band />
+    </pageFooter>
+    <summary>
+        <band />
+    </summary>
+</jasperReport>

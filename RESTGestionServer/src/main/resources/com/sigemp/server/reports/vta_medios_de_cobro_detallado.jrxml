@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_medios_de_cobro_detallado" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="de7724c5-c741-4293-93a0-d0e140e561eb">
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <parameter name="PARAMETRO_WHERE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[" AND c.fec between '2011-12-20' and '2011-12-21' "]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PARAMETRO_CONDICION" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="EMPRESA_NOMBRE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="EMPRESA_DATOS1" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA["C:\\Users\\cristian\\Documents\\NetBeansProjects\\sg\\SgGestion\\src\\com\\sigemp\\ventas\\reportes\\"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_EFECTIVO" class="java.lang.Object" isForPrompting="false">
+        <defaultValueExpression><![CDATA[$P{SUBREPORT_DIR} + "vta_medios_de_cobro_detallado_efectivo.jasper"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_TARJETA" class="java.lang.Object" isForPrompting="false">
+        <defaultValueExpression><![CDATA[$P{SUBREPORT_DIR} + "vta_medios_de_cobro_detallado_tarjeta.jasper"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_CHEQUE" class="java.lang.Object" isForPrompting="false">
+        <defaultValueExpression><![CDATA[$P{SUBREPORT_DIR} + "vta_medios_de_cobro_detallado_cheque.jasper"]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[select 1]]>
+    </queryString>
+    <field name="?column?" class="java.lang.Integer"/>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band />
+    </title>
+    <pageHeader>
+        <band height="101" >
+            <rectangle radius="7">
+                <reportElement key="rectangle-1" x="0" y="16" width="534" height="25" uuid="7307d2ee-36fc-4b1f-9a5b-647a2615c61b"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-2" x="0" y="0" width="209" height="14" uuid="5addded4-0856-4a04-a110-b14388ed76f0"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-3" x="325" y="0" width="209" height="14" uuid="957f19ba-408e-4739-a534-ff844562ff92"/>
+            </rectangle>
+            <rectangle radius="7">
+                <reportElement key="rectangle-4" x="0" y="43" width="534" height="30" uuid="d218ff7f-2195-4c03-a39f-98f9159390f1"/>
+            </rectangle>
+            <staticText>
+                <reportElement key="staticText-6" x="0" y="43" width="534" height="30" forecolor="#000000" uuid="4f1343a5-c3d8-454a-b8de-74ce4d25d30c"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="23"/>
+                </textElement>
+                <text><![CDATA[Medios de Cobro Detallado]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-3" x="2" y="74" width="526" height="26" uuid="595a9979-deb5-40fd-bb56-a51f8245ccc3"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{PARAMETRO_CONDICION}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-4" x="7" y="0" width="195" height="14" forecolor="#000000" uuid="f5259879-0c69-411a-80cf-be17525f25f3"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"  />
+                </textElement>
+                <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-5" x="342" y="0" width="119" height="14" forecolor="#000000" uuid="9274be9f-4bc1-4718-9204-c04584508245"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"  />
+                </textElement>
+                <textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report" isBlankWhenNull="false">
+                <reportElement key="textField-6" x="461" y="0" width="73" height="14" uuid="6c074a43-10ff-47c4-a3c2-6d056058936f"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-7" x="7" y="16" width="242" height="25" uuid="aafbb8d6-a149-4959-b502-5563f3001c17"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="12" isBold="true" isItalic="true" isUnderline="true" />
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_NOMBRE}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-8" x="251" y="16" width="271" height="25" uuid="82ce31e3-6fec-4a2a-a422-0dce2d350f94"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_DATOS1}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="3" />
+    </columnHeader>
+    <detail>
+        <band height="84" >
+            <subreport>
+                <reportElement x="0" y="0" width="535" height="28" uuid="a9f508f6-fc42-4806-9d38-f67b38a9bd69"/>
+                <subreportParameter name="PARAMETRO_WHERE">
+                    <subreportParameterExpression><![CDATA[$P{PARAMETRO_WHERE}]]></subreportParameterExpression>
+                </subreportParameter>
+                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                <subreportExpression><![CDATA[$P{SUBREPORT_EFECTIVO}]]></subreportExpression>
+            </subreport>
+            <subreport>
+                <reportElement positionType="Float" x="0" y="28" width="535" height="28" uuid="dbb8eb0b-b97f-4660-91d1-cefcc333aece"/>
+                <subreportParameter name="PARAMETRO_WHERE">
+                    <subreportParameterExpression><![CDATA[$P{PARAMETRO_WHERE}]]></subreportParameterExpression>
+                </subreportParameter>
+                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                <subreportExpression><![CDATA[$P{SUBREPORT_TARJETA}]]></subreportExpression>
+            </subreport>
+            <subreport>
+                <reportElement positionType="Float" x="0" y="56" width="535" height="28" uuid="131002cd-b202-4aeb-ae41-28fd835a9b69"/>
+                <subreportParameter name="PARAMETRO_WHERE">
+                    <subreportParameterExpression><![CDATA[$P{PARAMETRO_WHERE}]]></subreportParameterExpression>
+                </subreportParameter>
+                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                <subreportExpression><![CDATA[$P{SUBREPORT_CHEQUE}]]></subreportExpression>
+            </subreport>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="19" />
+    </columnFooter>
+    <pageFooter>
+        <band height="20" >
+            <line>
+                <reportElement key="line-1" x="0" y="0" width="535" height="1" forecolor="#000000" uuid="e255ccf2-81af-48f7-b679-5aefb1963227"/>
+                <graphicElement>
+                    <pen lineWidth="2.0" lineStyle="Solid"/>
+                </graphicElement>
+            </line>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-9" x="0" y="2" width="157" height="9" uuid="0a3bcbf2-6661-44d9-851b-38b9f40bcb4a"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[this.getClass().getName()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band />
+    </summary>
+</jasperReport>

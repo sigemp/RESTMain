@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-09-16T22:20:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_comprobante_ventas2_alicuotas" pageWidth="160" pageHeight="200" whenNoDataType="AllSectionsNoDetail" columnWidth="160" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="257f70fd-e6a4-4548-98cc-a4899364d31a">
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <property name="ireport.zoom" value="3.452271214393105"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <parameter name="VTAID" class="java.lang.Integer"/>
+    <queryString>
+		<![CDATA[]]>
+    </queryString>
+    <field name="total" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[total]]></fieldDescription>
+    </field>
+    <field name="alicuota" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[alicuota]]></fieldDescription>
+    </field>
+    <field name="vtaAlicuotaId" class="java.lang.Integer">
+        <fieldDescription><![CDATA[vtaAlicuotaId]]></fieldDescription>
+    </field>
+    <field name="baseImponible" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[baseImponible]]></fieldDescription>
+    </field>
+    <field name="tivaId" class="java.lang.Integer">
+        <fieldDescription><![CDATA[tivaId]]></fieldDescription>
+    </field>
+    <field name="vtaVta" class="com.sigemp.server.gestion.entity.VtaVta">
+        <fieldDescription><![CDATA[vtaVta]]></fieldDescription>
+    </field>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band />
+    </title>
+    <pageHeader>
+        <band />
+    </pageHeader>
+    <columnHeader>
+        <band height="9" >
+            <staticText>
+                <reportElement key="staticText-3" mode="Opaque" x="0" y="0" width="62" height="9" uuid="3029544e-3db8-4a3d-b282-bab168d8ab4a">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                </reportElement>
+                <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="DejaVu Sans" size="7" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Base Imponible]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-4" mode="Opaque" x="65" y="0" width="43" height="9" uuid="476072a5-2859-4b6d-b8e4-4ca1f4d2565c"/>
+                <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="DejaVu Sans" size="7" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Alicuota]]></text>
+            </staticText>
+            <staticText>
+                <reportElement key="staticText-5" mode="Opaque" x="110" y="0" width="50" height="9" uuid="9ca5edf2-335b-4ba3-9d84-8f932694a96f"/>
+                <box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2">
+                    <pen lineWidth="0.25"/>
+                    <topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.25" lineColor="#000000"/>
+                    <rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font fontName="DejaVu Sans" size="7" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="7" >
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="62" height="7" uuid="a34e3759-25de-49b8-979d-d502bbc16552"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font fontName="DejaVu Sans" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{baseImponible}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="65" y="0" width="43" height="7" uuid="fec2f4c7-f08c-403d-b569-c8bd1be89dcc"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font fontName="DejaVu Sans" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{alicuota}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="110" y="0" width="50" height="7" uuid="bd1bc096-d1b6-485c-887d-67a24428550f">
+                    <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                </reportElement>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font fontName="DejaVu Sans" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band />
+    </columnFooter>
+    <pageFooter>
+        <band />
+    </pageFooter>
+    <summary>
+        <band />
+    </summary>
+</jasperReport>

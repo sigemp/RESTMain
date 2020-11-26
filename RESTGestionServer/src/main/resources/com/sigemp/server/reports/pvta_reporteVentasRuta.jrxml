@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.1.final using JasperReports Library version 5.5.2  -->
+<!-- 2016-05-02T18:11:58 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="695211e1-07cb-4672-a230-42bf244fa763">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="EMPRESA_DATOS1" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="EMPRESA_NOMBRE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PARAMETRO_WHERE" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[" and fecdesde between '2010-09-01' and '2010-09-30'"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="PARAMETRO_CONDICION" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+		<![CDATA[]]>
+    </queryString>
+    <field name="cntBultos" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[cntBultos]]></fieldDescription>
+    </field>
+    <field name="cntClientes" class="java.lang.Long">
+        <fieldDescription><![CDATA[cntClientes]]></fieldDescription>
+    </field>
+    <field name="cntComprobantes" class="java.lang.Long">
+        <fieldDescription><![CDATA[cntComprobantes]]></fieldDescription>
+    </field>
+    <field name="cntEfectivizados" class="java.lang.Long">
+        <fieldDescription><![CDATA[cntEfectivizados]]></fieldDescription>
+    </field>
+    <field name="desRuta" class="java.lang.String">
+        <fieldDescription><![CDATA[desRuta]]></fieldDescription>
+    </field>
+    <field name="pEfectivizacion" class="java.lang.Double">
+        <fieldDescription><![CDATA[pEfectivizacion]]></fieldDescription>
+    </field>
+    <field name="ruta_id" class="java.lang.Integer">
+        <fieldDescription><![CDATA[ruta_id]]></fieldDescription>
+    </field>
+    <field name="total" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[total]]></fieldDescription>
+    </field>
+    <variable name="SUMA_TOTAL" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[((BigDecimal)$F{total}).doubleValue()]]></variableExpression>
+    </variable>
+    <variable name="SUMA_BULTOS" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[((BigDecimal)$F{cntBultos}).doubleValue()]]></variableExpression>
+    </variable>
+    <variable name="SUMA_CLIENTES" class="java.lang.Long" calculation="Sum">
+        <variableExpression><![CDATA[$F{cntClientes}]]></variableExpression>
+    </variable>
+    <variable name="SUMA_EFECTIVIZADOS" class="java.lang.Long" calculation="Sum">
+        <variableExpression><![CDATA[$F{cntEfectivizados}]]></variableExpression>
+    </variable>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band height="26" />
+    </title>
+    <pageHeader>
+        <band height="103" >
+            <rectangle radius="7">
+                <reportElement key="rectangle-4" x="0" y="16" width="555" height="25" uuid="e09707f5-cd3b-4618-a288-726371543f9d"/>
+            </rectangle>
+            <rectangle radius="7">
+                <reportElement key="rectangle-7" x="0" y="42" width="555" height="30" uuid="f8f478a4-1311-487d-9217-54590b4852f9"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-6" x="346" y="0" width="209" height="14" uuid="ca63173c-928a-47e6-871f-37d15cd5e88d"/>
+            </rectangle>
+            <rectangle radius="4">
+                <reportElement key="rectangle-5" x="0" y="0" width="111" height="14" uuid="404a10df-fa2a-4d5a-9f92-aa7181703b38"/>
+            </rectangle>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-5" x="5" y="16" width="125" height="25" uuid="c462fa96-6b27-46cc-bba0-7e9166c4481b"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="9" isBold="true" isItalic="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_NOMBRE}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-3" x="363" y="0" width="185" height="14" forecolor="#000000" uuid="ce2839be-770f-4879-8150-dd3afc1c0ed2"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER} + " de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement key="staticText-14" x="5" y="42" width="543" height="30" forecolor="#000000" uuid="92e6930c-757f-4c31-ad5f-f2c8f556afc6"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="23"/>
+                </textElement>
+                <text><![CDATA[Ventas por Ruta]]></text>
+            </staticText>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-6" x="346" y="16" width="202" height="25" uuid="f07d6544-ca01-4d31-b728-bf2af93a7787"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{EMPRESA_DATOS1}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement key="textField-2" x="5" y="0" width="104" height="14" forecolor="#000000" uuid="ae81adc6-0086-401e-adc6-82bd0f319e33"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField-1" x="2" y="75" width="553" height="26" uuid="0d8756da-e7c6-4364-860c-3d14a5c9bd4a"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement markup="styled">
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{PARAMETRO_CONDICION}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="26" >
+            <staticText>
+                <reportElement mode="Transparent" x="0" y="0" width="37" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="1852f5c3-0a0e-475c-88c8-8f4ac974defe"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[ID Ruta]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="37" y="0" width="141" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="5e4aa936-2eed-4fe1-9cea-49ab6d182d93"/>
+                <textElement verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Descripcion]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="184" y="0" width="61" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="df41bd85-91ca-464a-a526-c2ffdac98037"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Comprobantes]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="248" y="0" width="48" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="166c18f9-9bf0-4e4e-a9f9-13cdaadea418"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Bultos]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="299" y="0" width="48" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="96c60c4d-262d-4972-965a-0fcb52b946fa"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Cnt Clientes]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="350" y="0" width="48" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="00cdfd7c-da11-4ae4-8eb9-09ada52e671a"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Cantidad Efectivizados]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="401" y="0" width="48" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="8e091f68-70c3-4dea-a128-cdb89d61a6a2"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[% Efectivizacion]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="452" y="0" width="64" height="26" forecolor="#000000" backcolor="#FFFFFF" uuid="1840c171-4c60-4181-bb6f-ea6ea5f21fd8"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="13" >
+            <textField>
+                <reportElement x="0" y="0" width="37" height="13" uuid="e8903cdd-0cab-4611-a532-5a931889fa25"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{ruta_id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="40" y="0" width="141" height="13" uuid="c1916cbf-c1d8-41a5-974f-3b8ef0262eb7"/>
+                <textElement>
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{desRuta}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="248" y="0" width="48" height="13" uuid="9ae929ac-4e42-434f-991a-5b0ae76a2141"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cntBultos}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="299" y="0" width="48" height="13" uuid="27a17d90-07e5-4a34-94ac-67d89ebfb208"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cntClientes}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="184" y="0" width="61" height="13" uuid="5254da11-15e3-4541-b20a-f4085e9a19a6"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cntComprobantes}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)">
+                <reportElement x="401" y="0" width="48" height="13" uuid="949e2f09-e304-4f3f-8733-d31e15af1aaa"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{pEfectivizacion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="0" width="48" height="13" uuid="22f5759a-54fe-4e86-9d30-7318355778e4"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cntEfectivizados}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)">
+                <reportElement x="452" y="0" width="64" height="13" uuid="5c9d7147-6f28-4771-a0d8-0e2c142599c4"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Monospaced" size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="11" />
+    </columnFooter>
+    <pageFooter>
+        <band height="13" >
+            <textField pattern="###0.00;(###0.00)" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="452" y="0" width="64" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="f882554c-1021-4e11-a40c-61d2ed13c49e"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_TOTAL}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="248" y="0" width="48" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="4330ec8d-69c2-4cb8-a3a3-434225765dca"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_BULTOS}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###0.00;(###0.00)" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="301" y="0" width="48" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="c73dd491-7d01-42cd-a903-db8f8a437d1b"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_CLIENTES}]]></textFieldExpression>
+            </textField>
+            <textField pattern="" isBlankWhenNull="false">
+                <reportElement mode="Transparent" x="350" y="0" width="48" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="0d9a26f8-b2b3-43f0-adfb-5d352d08bfc5"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{SUMA_EFECTIVIZADOS}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="5" y="0" width="37" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="39ba8957-c104-49c5-a2fd-21d7710aada7"/>
+                <textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+                    <font fontName="Monospaced" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+                    <paragraph lineSpacing="Single"/>
+                </textElement>
+                <text><![CDATA[Totales:]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="22" />
+    </summary>
+</jasperReport>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-12T11:22:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_listado_de_cuentas_deuda_detalle" columnCount="2" printOrder="Horizontal" pageWidth="521" pageHeight="842" columnWidth="260" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7b68696b-e851-4043-862d-537eacce28f3">
+    <property name="ireport.scriptlethandling" value="0"/>
+    <property name="ireport.encoding" value="UTF-8"/>
+    <property name="ireport.zoom" value="3.4522712143931042"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <import value="net.sf.jasperreports.engine.*"/>
+    <import value="java.util.*"/>
+    <import value="net.sf.jasperreports.engine.data.*"/>
+    <parameter name="CTA_ID" class="java.math.BigDecimal" isForPrompting="false"/>
+    <queryString>
+		<![CDATA[select gsy_tiposcomprobantes.des ||'-' || uf_gsy_numcom(vta_vta.ptovta,vta_vta.num) as num,
+      vta_vta.cuotas,vta_vta.fec,
+       vta_vtap.cuo,vta_vtap.fecvto,vta_vtap.fecpag,vta_vtap.tot,vta_vtap.totsal
+from vta_vta,vta_vtap,gsy_tiposcomprobantes
+where vta_vta.vta_id = vta_vtap.vta_id
+  and vta_vta.cuotas > 0
+  and gsy_tiposcomprobantes.tc_id = vta_vta.tc_id
+  and vta_vta.cta_id = $P{CTA_ID}
+order by num,cuo]]>
+    </queryString>
+    <field name="num" class="java.lang.String"/>
+    <field name="cuotas" class="java.lang.Integer"/>
+    <field name="fec" class="java.sql.Timestamp"/>
+    <field name="cuo" class="java.lang.Integer"/>
+    <field name="fecvto" class="java.sql.Timestamp"/>
+    <field name="fecpag" class="java.sql.Timestamp"/>
+    <field name="tot" class="java.math.BigDecimal"/>
+    <field name="totsal" class="java.math.BigDecimal"/>
+    <group name="numero">
+        <groupExpression><![CDATA[$F{num}]]></groupExpression>
+        <groupHeader>
+            <band height="25" >
+                <rectangle>
+                    <reportElement key="rectangle-1" x="0" y="0" width="208" height="23" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="035d34a8-ca29-4d1a-bab2-a599831ffdc7"/>
+                </rectangle>
+                <textField isBlankWhenNull="false">
+                    <reportElement key="textField" x="49" y="0" width="146" height="12" uuid="c39e42e4-7ff9-4c87-9482-30798c34f7d1"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement>
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{num}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="false">
+                    <reportElement key="textField" x="141" y="12" width="54" height="12" uuid="f7d2c26b-cc88-4f0a-ab28-0a288f2d80fe"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement>
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{cuotas}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="false">
+                    <reportElement key="textField" x="49" y="12" width="54" height="12" uuid="0b2f0a66-de72-484d-b589-2a0fde14827a"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement>
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{fec}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement key="staticText-1" x="0" y="0" width="49" height="12" uuid="fd54a0de-6ab9-41f7-81c8-2a4751388b81"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement textAlignment="Right">
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <text><![CDATA[Comprobante:]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement key="staticText-2" x="108" y="12" width="33" height="12" uuid="e022f5fb-bca8-43e1-84f7-e30daaceed65"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement textAlignment="Right">
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <text><![CDATA[Cuotas:]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement key="staticText-3" x="0" y="12" width="49" height="12" uuid="b88d4488-0b96-412b-9de9-866af0b37a8b"/>
+                    <box>
+                        <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                        <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                        <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    </box>
+                    <textElement textAlignment="Right">
+                        <font size="8" isUnderline="true"/>
+                    </textElement>
+                    <text><![CDATA[Fecha Com.:]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band />
+        </groupFooter>
+    </group>
+    <background>
+        <band />
+    </background>
+    <title>
+        <band />
+    </title>
+    <pageHeader>
+        <band />
+    </pageHeader>
+    <columnHeader>
+        <band />
+    </columnHeader>
+    <detail>
+        <band height="8" >
+            <textField isBlankWhenNull="false">
+                <reportElement key="textField" x="0" y="0" width="19" height="8" uuid="557002d3-e282-4a69-a004-f3e0430f88a8"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cuo}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+                <reportElement key="textField" x="23" y="0" width="47" height="8" uuid="7cb60335-c98f-4448-9c71-50b43ec6f6f6"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{fecvto}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+                <reportElement key="textField" x="74" y="0" width="47" height="8" uuid="1df3a007-8973-446e-93a6-dd3c9007cc45"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement>
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{fecpag}]]></textFieldExpression>
+            </textField>
+            <textField pattern="##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="125" y="0" width="39" height="8" uuid="858eabfa-9528-4f67-8ba1-17c0d5512cea"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tot}]]></textFieldExpression>
+            </textField>
+            <textField pattern="##0.00" isBlankWhenNull="false">
+                <reportElement key="textField" x="168" y="0" width="34" height="8" uuid="93a1f581-5959-4802-9e44-d7dd55343090"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Right">
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{totsal}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band />
+    </columnFooter>
+    <pageFooter>
+        <band />
+    </pageFooter>
+    <summary>
+        <band />
+    </summary>
+</jasperReport>

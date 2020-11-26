@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.3.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_motivo_no_ventas" pageWidth="595" pageHeight="842" columnWidth="535" columnSpacing="4" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="9643dba7-1de0-4ee1-a82a-3189aab9ece5">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="176"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<subDataset name="DatasetActividad" uuid="2ad0197b-353a-4c07-9419-6e166b8077be">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SgGestion beans"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="fecha" class="java.util.Date">
+			<fieldDescription><![CDATA[fecha]]></fieldDescription>
+		</field>
+		<field name="total" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[total]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="PARAMETRO_CONDICION" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PARAMETRO_WHERE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EMPRESA_NOMBRE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EMPRESA_DATOS1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PARAMETRO_TABLE" class="java.lang.String"/>
+	<parameter name="PARAMETRO_CANTIDAD_REGISTROS" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="entregaId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[entregaId]]></fieldDescription>
+	</field>
+	<field name="ctaId" class="java.lang.Long">
+		<fieldDescription><![CDATA[ctaId]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="fechaPreventa" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaPreventa]]></fieldDescription>
+	</field>
+	<field name="obs" class="java.lang.String">
+		<fieldDescription><![CDATA[obs]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[estado]]></fieldDescription>
+	</field>
+	<field name="fechaUltimoVenta" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaUltimoVenta]]></fieldDescription>
+	</field>
+	<field name="dias" class="java.lang.Integer">
+		<fieldDescription><![CDATA[dias]]></fieldDescription>
+	</field>
+	<field name="orderRuta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[orderRuta]]></fieldDescription>
+	</field>
+	<field name="fechaEntrega" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaEntrega]]></fieldDescription>
+	</field>
+	<variable name="VENTAS_CONCRETADAS" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{obs}.equals("VICITADO PREVENTA")]]></variableExpression>
+	</variable>
+	<variable name="VENTAS_NO_CONCRETADAS" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[!$F{obs}.equals( "VICITADO PREVENTA" ) && !$F{obs}.equals( "NO VICITADO" )]]></variableExpression>
+	</variable>
+	<variable name="VENTAS_NO_VICITADO" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{obs}.equals( "NO VICITADO" )]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<pageHeader>
+		<band height="66">
+			<staticText>
+				<reportElement key="staticText-19" x="0" y="0" width="530" height="30" forecolor="#000000" uuid="c8b42e75-f3cb-460e-ac96-f4a303cb6a13"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="23"/>
+				</textElement>
+				<text><![CDATA[Motivo No Venta]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="1" y="32" width="529" height="26" uuid="f055498f-1d52-4baf-8313-ef25e09a4ef1"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement markup="styled">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PARAMETRO_CONDICION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="11">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="11" uuid="eeef6786-051f-455f-a21e-2e96628562b6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b9e09a6-29e7-4f8a-a2ea-2b1a4524203f"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[ID Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="0" width="122" height="11" uuid="d0743bc3-ff26-4b85-bcdc-6f2c3943a02b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3563c1a-053f-4a68-8122-0711ad2d8936"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="0" width="104" height="11" uuid="057e16cb-cbde-4005-a12d-24d1009064c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0aa4dd73-bec3-4125-a05a-4dea748b645e"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Observaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="50" height="11" uuid="6f054ffe-8f44-4fbe-be77-0f584bc9295e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cff70bbf-5187-4c49-adee-a909d6a62567"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="0" width="66" height="11" uuid="df068eb6-d7a8-4ed6-8eb8-046d7c063cd5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed8cb450-83ca-4089-b6cd-f5c56be67105"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Fecha Ult. Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="58" height="11" uuid="9e0fca70-9d00-42ea-ad38-1fccfd08641e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43306a2e-1653-45e0-b687-0e73bb7c823b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Dias Ult. Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="50" height="11" uuid="eb60788c-8e22-4e82-bd11-b68b06168384">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a110c17-167e-4a6e-97ce-80a86f628384"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Orden Ruta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="12" uuid="5aa3ed7d-29af-47e2-8207-a8a4c7bb0277">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b9e09a6-29e7-4f8a-a2ea-2b1a4524203f"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctaId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="0" width="122" height="12" uuid="9ebfea73-fe1c-4c17-b3ca-8de5459efaca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3563c1a-053f-4a68-8122-0711ad2d8936"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="104" height="12" uuid="9996d4c6-c93e-4052-b930-bba5e1d5ce5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0aa4dd73-bec3-4125-a05a-4dea748b645e"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="50" height="12" uuid="ff6a5893-b673-4d5f-a420-2d31aad5d53c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cff70bbf-5187-4c49-adee-a909d6a62567"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="66" height="12" uuid="5c7dd7bc-5897-4b36-8820-244dadb06204">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ed8cb450-83ca-4089-b6cd-f5c56be67105"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaUltimoVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="58" height="12" uuid="e420f16d-a067-461b-83c5-09ad2d6ef061">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43306a2e-1653-45e0-b687-0e73bb7c823b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="50" height="12" uuid="06244341-7681-4b0a-b3bb-2efc88d80c1d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6a110c17-167e-4a6e-97ce-80a86f628384"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{orderRuta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{PARAMETRO_CANTIDAD_REGISTROS}.intValue() == $V{REPORT_COUNT}.intValue()]]></printWhenExpression>
+			<staticText>
+				<reportElement x="1" y="4" width="90" height="11" uuid="27daf0cf-1af0-4ba5-90e2-d4e3480276cc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Ventas Concretadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="15" width="90" height="11" uuid="d6998d5b-29c5-4136-9f3f-ba32fcaf4537">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Ventas no Concretadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="26" width="90" height="11" uuid="429dfda0-cb2c-4b8b-a64e-60d82a03eed0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[No Vicitados:]]></text>
+			</staticText>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="91" y="4" width="50" height="11" uuid="03d6dd7e-6a59-4efc-aa17-542e38b23e44"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{VENTAS_CONCRETADAS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="91" y="15" width="50" height="11" uuid="454c9c4f-a2cb-4186-8cc4-764034a0650f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{VENTAS_NO_CONCRETADAS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="91" y="26" width="50" height="11" uuid="d7091016-9995-4f69-aa3c-df490bfb1e39">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{VENTAS_NO_VICITADO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>

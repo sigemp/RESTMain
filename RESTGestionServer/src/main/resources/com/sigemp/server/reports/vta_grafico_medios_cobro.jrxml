@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.3.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vta_grafico_medios_cobro" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="13fa6720-d402-4f8f-a041-d28958f664ac">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<queryString>
+		<![CDATA[SELECT cr.mc_id,m.des as mcdes,sum(abs(cr.tot)) as tot
+FROM vta_cob as c,vta_cobr as cr,vta_mc as m
+WHERE c.cob_id = cr.cob_id
+  AND cr.mc_id = m.mc_id
+GROUP BY cr.mc_id,m.des
+ORDER BY cr.mc_id]]>
+	</queryString>
+	<field name="mc_id" class="java.lang.Integer"/>
+	<field name="mcdes" class="java.lang.String"/>
+	<field name="tot" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="196" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement key="element-1" x="67" y="6" width="262" height="184" uuid="ce56b0d4-5526-49ca-ab4c-99ca7698b858"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{mcdes}]]></keyExpression>
+					<valueExpression><![CDATA[$F{tot}]]></valueExpression>
+					<labelExpression><![CDATA[$F{mcdes}]]></labelExpression>
+				</pieDataset>
+				<piePlot isCircular="true">
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="50" splitType="Stretch"/>
+	</summary>
+</jasperReport>
