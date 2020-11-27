@@ -64,7 +64,7 @@ public class GsyContadores implements Serializable {
     private int cantidadCopias;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 0, max = 60)
     @Column(name = "des")
     private String des;
     @Basic(optional = false)
@@ -73,7 +73,7 @@ public class GsyContadores implements Serializable {
     private boolean estado;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 120)
+    @Size(min = 0, max = 120)
     @Column(name = "impresora_directa")
     private String impresoraDirecta;
     @Basic(optional = false)

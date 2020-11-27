@@ -19,15 +19,11 @@ import com.sigemp.gestion.client.services.GsyContadoresTipoService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.common.SwingUtils;
 import com.sigemp.common.exception.SgException;
-import com.sigemp.constants.ComportamientoEmisionComprobante;
 import com.sigemp.gestion.constants.Comprobante;
-import com.sigemp.constants.Sistema;
-import com.sigemp.gestion.server.constantes.TipoSalida;
-import com.sigemp.client.dto.AbstractComprobante;
 import com.sigemp.gestion.client.online.wrapper.WrapperContador;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.Comprobantes;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobante;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.TipoContador;
+import com.sigemp.gestion.constants.ComportamientoEmisionComprobante;
+import com.sigemp.gestion.constants.Sistema;
+import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
 import com.sigemp.gestion.shared.entity.GsyContadores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -101,15 +97,15 @@ public class FromContadores extends javax.swing.JPanel {
         jCheckBox2.setSelected(currentRecord.getAutoIncrementa());
         jCheckBox4.setSelected(currentRecord.getPermiteCambioFecha());
 
-        TipoContador tipoContador = wcurrentRecord.getTrTipoContador();
+        Sistema tipoContador = wcurrentRecord.getTrTipoContador();
         if (tipoContador != null) {
             jcb_tiposContador.setSelectedItem(tipoContador);
         } else {
             jcb_tiposContador.setSelectedIndex(0);
         }
 
-        FormatoComprobante formatoImpresionId = wcurrentRecord.getTrFormatoImpresion();
-        FormatoComprobante formatoVistaPreviaId = wcurrentRecord.getTrFormatoVistaPrevia();
+        FormatoComprobanteDto formatoImpresionId = wcurrentRecord.getTrFormatoImpresion();
+        FormatoComprobanteDto formatoVistaPreviaId = wcurrentRecord.getTrFormatoVistaPrevia();
 
         if (formatoImpresionId != null) {
             jcb_FormatoImpresion.setSelectedItem(formatoImpresionId);

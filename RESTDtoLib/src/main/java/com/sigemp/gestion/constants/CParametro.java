@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.constants;
+package com.sigemp.gestion.constants;
 
 public enum CParametro {
     EMPRESA_AGENTE_PERCEPCION_IIBB_CATAMARCA("general.percepcion.iibb.catamarca", ""),

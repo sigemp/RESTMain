@@ -6,12 +6,17 @@
 package com.sigemp.gestion.shared.dto.ventanaPtoVenta;
 
 /**
- * tipo de controlador
+ *
  * @author sigem
  */
-public class TipoContador {
+public class FormatoComprobanteDto {
     private Integer id;
     private String des;
+
+    public FormatoComprobanteDto(int id, String des) {
+        this.id = id;
+        this.des = des;
+    }
 
     /**
      * @return the id

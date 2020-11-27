@@ -13,49 +13,49 @@ import java.util.List;
  */
 public class OpcionesContadorDto {
 
-    private List<FormatoComprobante> formatoImpresion;
-    private List<FormatoComprobante> formatoVistaPrevia;
-    private List<Comprobantes> formatosComprobantes;
+    private List<FormatoComprobanteDto> formatoImpresion;
+    private List<FormatoComprobanteDto> formatoVistaPrevia;
+    private List<Integer> comprobantes;
 
     /**
      * @return the formatoImpresion
      */
-    public List<FormatoComprobante> getFormatoImpresion() {
+    public List<FormatoComprobanteDto> getFormatoImpresion() {
         return formatoImpresion;
     }
 
     /**
      * @param formatoImpresion the formatoImpresion to set
      */
-    public void setFormatoImpresion(List<FormatoComprobante> formatoImpresion) {
+    public void setFormatoImpresion(List<FormatoComprobanteDto> formatoImpresion) {
         this.formatoImpresion = formatoImpresion;
     }
 
     /**
      * @return the formatoVistaPrevia
      */
-    public List<FormatoComprobante> getFormatoVistaPrevia() {
+    public List<FormatoComprobanteDto> getFormatoVistaPrevia() {
         return formatoVistaPrevia;
     }
 
     /**
      * @param formatoVistaPrevia the formatoVistaPrevia to set
      */
-    public void setFormatoVistaPrevia(List<FormatoComprobante> formatoVistaPrevia) {
+    public void setFormatoVistaPrevia(List<FormatoComprobanteDto> formatoVistaPrevia) {
         this.formatoVistaPrevia = formatoVistaPrevia;
     }
 
     /**
      * @return the formatosComprobantes
      */
-    public List<Comprobantes> getFormatosComprobantes() {
-        return formatosComprobantes;
+    public List<Integer> getComprobantes() {
+        return comprobantes;
     }
 
     /**
      * @param formatosComprobantes the formatosComprobantes to set
      */
-    public void setFormatosComprobantes(List<Comprobantes> formatosComprobantes) {
-        this.formatosComprobantes = formatosComprobantes;
+    public void setComprobantes(List<Integer> formatosComprobantes) {
+        this.comprobantes = formatosComprobantes;
     }
 }

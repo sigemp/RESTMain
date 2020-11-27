@@ -7,8 +7,8 @@ package com.sigemp.gestion.client.services.ventanaPtoVenta;
 
 import com.sigemp.gestion.client.services.RESTService;
 import com.sigemp.common.exception.SgException;
+import com.sigemp.gestion.shared.dto.ventanaPtoVenta.OpcionesContadorDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.PtoVtaDto;
-import com.sigemp.gestion.shared.entity.GsyProv;
 import com.sigemp.gestion.shared.entity.GsyTalonarios;
 import java.util.List;
 import javax.ws.rs.client.WebTarget;
@@ -63,11 +63,28 @@ public class PtoVtaService extends RESTService {
                     .accept(MediaType.APPLICATION_JSON)
                     .get();
 
-            List<PtoVtaDto> listCu = (List<PtoVtaDto>) res.readEntity(new GenericType<List<PtoVtaDto>>() {
+            List<PtoVtaDto> listDto = (List<PtoVtaDto>) res.readEntity(new GenericType<List<PtoVtaDto>>() {
             });
-            return listCu;
+            return listDto;
         } catch (Exception ex) {
             throw new SgException("Error " + " URI: " + tar.getUri().toASCIIString(), ex);
         }
     }
+
+    public OpcionesContadorDto getOpcionesVtaDtos(String tipoContador) throws SgException {
+        WebTarget tar = target.path("opcionesContador");
+        try {
+
+            Response res = tar
+                    .request()
+                    .accept(MediaType.APPLICATION_JSON)
+                    .get();
+
+            OpcionesContadorDto opcionesContadorDto = res.readEntity(OpcionesContadorDto.class);
+            return opcionesContadorDto;
+        } catch (Exception ex) {
+            throw new SgException("Error " + " URI: " + tar.getUri().toASCIIString(), ex);
+        }
+    }
+
 }

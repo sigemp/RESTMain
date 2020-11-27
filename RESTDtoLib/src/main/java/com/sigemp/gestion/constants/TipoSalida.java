@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.server.constantes;
+package com.sigemp.gestion.constants;
 
 public enum TipoSalida {
     GRAFICA("Grafica", 0), MATRIZ_PUNTO("Matriz de Punto", 1);

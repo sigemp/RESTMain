@@ -5,9 +5,9 @@
  */
 package com.sigemp.gestion.client.online.wrapper;
 
-import com.sigemp.constants.ComportamientoEmisionComprobante;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobante;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.TipoContador;
+import com.sigemp.gestion.constants.ComportamientoEmisionComprobante;
+import com.sigemp.gestion.constants.Sistema;
+import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
 import com.sigemp.gestion.shared.entity.GsyContadores;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,11 @@ import java.util.List;
  */
 public class WrapperContador {
 
-    public static List<FormatoComprobante> listaFormato = new ArrayList<>();
-    public static List<TipoContador> listTipoContador = new ArrayList<>();
+    public static List<FormatoComprobanteDto> listaFormato = new ArrayList<>();
 
-    private FormatoComprobante trFormatoImpresion;
-    private FormatoComprobante trFormatoVistaPrevia;
-    private TipoContador trSistema;
+    private FormatoComprobanteDto trFormatoImpresion;
+    private FormatoComprobanteDto trFormatoVistaPrevia;
+    private Sistema trSistema;
     private ComportamientoEmisionComprobante trComportamientoEnEmisionComprobante;
 
     public static WrapperContador instance(GsyContadores current) {
@@ -36,12 +35,12 @@ public class WrapperContador {
         this.gsyContador = current;
     }
 
-    public void setTrFormatoImpresion(FormatoComprobante trFormatoImpresion) {
+    public void setTrFormatoImpresion(FormatoComprobanteDto trFormatoImpresion) {
         this.trFormatoImpresion = trFormatoImpresion;
         gsyContador.setFormatioImpresion(trFormatoImpresion.getId());
     }
 
-    public FormatoComprobante getTrFormatoImpresion() {
+    public FormatoComprobanteDto getTrFormatoImpresion() {
         if (gsyContador.getFormatioImpresion() == null) {
             return null;
         }
@@ -51,12 +50,12 @@ public class WrapperContador {
         return trFormatoImpresion;
     }
 
-    public void setTrFormatoVistaPrevia(FormatoComprobante trFormatoVistaPrevia) {
+    public void setTrFormatoVistaPrevia(FormatoComprobanteDto trFormatoVistaPrevia) {
         this.trFormatoVistaPrevia = trFormatoVistaPrevia;
         gsyContador.setFormatioVistaPrevia(trFormatoVistaPrevia.getId());
     }
 
-    public FormatoComprobante getTrFormatoVistaPrevia() {
+    public FormatoComprobanteDto getTrFormatoVistaPrevia() {
         if (gsyContador.getFormatioVistaPrevia() == null) {
             return null;
         }
@@ -66,17 +65,17 @@ public class WrapperContador {
         return trFormatoVistaPrevia;
     }
 
-    public TipoContador getTrTipoContador() {
+    public Sistema getTrTipoContador() {
         if (gsyContador.getTipoContador() == null) {
             return null;
         }
         if (trSistema == null || !gsyContador.getTipoContador().equals(trSistema.getId())) {
-            trSistema = getTipoContadorById(gsyContador.getTipoContador());
+            trSistema = Sistema.getById(gsyContador.getTipoContador());
         }
         return trSistema;
     }
 
-    public void setTrTipoContador(TipoContador tipoContador) {
+    public void setTrTipoContador(Sistema tipoContador) {
         this.trSistema = tipoContador;
         gsyContador.setTipoContador(tipoContador.getId());
     }
@@ -102,8 +101,8 @@ public class WrapperContador {
      * @param id
      * @return
      */
-    public FormatoComprobante getFormatoById(Integer id) {
-        for (FormatoComprobante f : listaFormato) {
+    public FormatoComprobanteDto getFormatoById(Integer id) {
+        for (FormatoComprobanteDto f : listaFormato) {
             if (f.getId().equals(id)) {
                 return f;
             }
@@ -111,12 +110,4 @@ public class WrapperContador {
         return null;
     }
 
-    public TipoContador getTipoContadorById(Integer id) {
-        for (TipoContador f : listTipoContador) {
-            if (f.getId().equals(id)) {
-                return f;
-            }
-        }
-        return null;
-    }
 }

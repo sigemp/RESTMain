@@ -5,13 +5,10 @@
  */
 package com.sigemp.gestion.server.services.ventanaPtoVenta;
 
-import com.sigemp.gestion.client.constantes.ConstantesComprobantes;
-import com.sigemp.gestion.client.constantes.ConstantesComprobantes.ComportamientoEmisionComprobante;
-import com.sigemp.gestion.server.constantes.Comprobante;
-import com.sigemp.gestion.server.constantes.Sistema;
+import com.sigemp.gestion.constants.Comprobante;
+import com.sigemp.gestion.constants.Sistema;
 import com.sigemp.gestion.server.services.*;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.Comprobantes;
-import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobante;
+import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsySucDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorTipoDto;
@@ -21,7 +18,6 @@ import com.sigemp.gestion.shared.entity.GsyContadores;
 import com.sigemp.gestion.shared.entity.GsyContadorestipos;
 import com.sigemp.gestion.shared.entity.GsySuc;
 import com.sigemp.gestion.shared.entity.GsyTalonarios;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,11 +29,9 @@ import javax.persistence.criteria.Root;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import sun.security.util.ArrayUtil;
 
 /**
  *
@@ -193,9 +187,9 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
 
         // leo los comprobantes y los agrego 
         // AbstractComprobante
-        FormatoComprobante f = new FormatoComprobante(1, "Formato dinamico 1");
-        FormatoComprobante f2 = new FormatoComprobante(2, "Formato dinamico 2");
-        List<FormatoComprobante> lisFormatoComprobantes = new ArrayList<>();
+        FormatoComprobanteDto f = new FormatoComprobanteDto(1, "Formato dinamico 1");
+        FormatoComprobanteDto f2 = new FormatoComprobanteDto(2, "Formato dinamico 2");
+        List<FormatoComprobanteDto> lisFormatoComprobantes = new ArrayList<>();
         lisFormatoComprobantes.add(f);
         lisFormatoComprobantes.add(f2);
 
@@ -203,16 +197,14 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
         opcionesContador.setFormatoVistaPrevia(lisFormatoComprobantes);
 
         List<Comprobante> listComprobante = Comprobante.getComprobantes(Sistema.valueOf(tipoContador));
-        List<Comprobantes> listComprobantes = new ArrayList<>();
+        List<Integer> listComprobantes = new ArrayList<>();
 
         for (Comprobante c : listComprobante) {
-            Comprobantes cc = new Comprobantes();
-            cc.setId(c.getTcId());
-            cc.setDes(c.getDescripcion());
-            listComprobantes.add(cc);
+
+            listComprobantes.add(c.getTcId());
         }
 
-        opcionesContador.setFormatosComprobantes(listComprobantes);
+        opcionesContador.setComprobantes(listComprobantes);
 
         return opcionesContador;
     }
