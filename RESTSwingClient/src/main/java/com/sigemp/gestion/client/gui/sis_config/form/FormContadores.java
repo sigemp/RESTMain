@@ -10,19 +10,16 @@ package com.sigemp.gestion.client.gui.sis_config.form;
  *
  * Created on 23/11/2011, 12:53:00
  */
-
-
-
 import com.sigemp.gestion.client.gui.component.base.Toast;
-import com.sigemp.gestion.client.services.GsyContadoresService;
-import com.sigemp.gestion.client.services.GsyContadoresTipoService;
-import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.common.SwingUtils;
 import com.sigemp.common.exception.SgException;
 import com.sigemp.gestion.constants.Comprobante;
 import com.sigemp.gestion.client.online.wrapper.WrapperContador;
+import com.sigemp.gestion.client.services.ServiceFactory;
+import com.sigemp.gestion.client.services.ventanaPtoVenta.PtoVtaService;
 import com.sigemp.gestion.constants.ComportamientoEmisionComprobante;
 import com.sigemp.gestion.constants.Sistema;
+import com.sigemp.gestion.constants.TipoSalida;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
 import com.sigemp.gestion.shared.entity.GsyContadores;
 import java.awt.event.ActionEvent;
@@ -40,18 +37,17 @@ import javax.swing.tree.DefaultTreeModel;
  *
  * @author CRISTIANE
  */
-public class FromContadores extends javax.swing.JPanel {
+public class FormContadores extends javax.swing.JPanel {
 
     private final DefaultListModel<Comprobante> model;
-    private final GsyContadoresTipoService controladorContadorTipo = ServiceFactory.getGsyContadoresTipo();
-    private final GsyContadoresService controladorService = ServiceFactory.getGsyContador();
+    //private final GsyContadoresTipoService controladorContadorTipo = ServiceFactory.getGsyContadoresTipo();
+    //private final GsyContadoresService controladorService = ServiceFactory.getGsyContador();
+    private final PtoVtaService ptovtaService = ServiceFactory.getPtoVtaService();
 
     protected GsyContadores currentRecord;
     private DefaultMutableTreeNode dmtn;
     private DefaultTreeModel modelo;
     private WrapperContador wcurrentRecord;
-    
-    
 
     /**
      * Get the value of currentRecord
@@ -82,7 +78,7 @@ public class FromContadores extends javax.swing.JPanel {
     public void setCurrentRecord(GsyContadores currentRecord) {
         this.currentRecord = currentRecord;
         this.wcurrentRecord = WrapperContador.instance(currentRecord);
-        
+
         if (currentRecord.getConId() != null) {
             jFormattedTextField1.setValue(currentRecord.getConId());
         } else {
@@ -128,12 +124,13 @@ public class FromContadores extends javax.swing.JPanel {
         }
 
         
-   currentRecord.
-        List<Comprobantes> listTiposComprobantes = WrapperContador..getListByContadorId(currentRecord);
-
+        List<Integer> listComprobantes = ptovtaService.getComprobantesByContador(currentRecord.getTipoContador());
+        
+        // Agrego los comprobantes que estan asignados a este contador
         model.removeAllElements();
-        for (Comprobantes tc : listTiposComprobantes) {
-            model.addElement(tc);
+        for (Integer tc : listComprobantes) {
+            Comprobante.getById(tc);
+            model.addElement(Comprobante.getById(tc));
         }
 
         actualizarEstadoCheckBox();
@@ -143,7 +140,7 @@ public class FromContadores extends javax.swing.JPanel {
     /**
      * Creates new form PanelTalonariosForm
      */
-    public FromContadores() {
+    public FormContadores() {
         initComponents();
         SwingUtils.setMaskCantidadDecimal(jFormattedTextField1, 0);
         SwingUtils.setSelectText(jFormattedTextField1);
@@ -180,7 +177,7 @@ public class FromContadores extends javax.swing.JPanel {
 
         List<Comprobante> listTcIngresados = getListTiposComprobantes();
 
-        DialogGsyContadoresComprobantes diag = new DialogGsyContadoresComprobantes(this,true);
+        DialogSeleccionComprobantes diag = new DialogSeleccionComprobantes(null, true);
 
         Sistema tiposContadores = (Sistema) jcb_tiposContador.getSelectedItem();
 
@@ -208,35 +205,35 @@ public class FromContadores extends javax.swing.JPanel {
     private void cargarFormatosEnComboBox() {
         Sistema sistema = (Sistema) jcb_tiposContador.getSelectedItem();
 
-        List<AbstractComprobante> list = AbstractComprobante.getListaFormatosComprobantes(sistema);
-        
-        jcb_FormatoVistaPrevia.removeAllItems();
-        for (AbstractComprobante o : list) {
-            if (o.getTipoSalida() == TipoSalida.GRAFICA) {
-                jcb_FormatoVistaPrevia.addItem(o);
-            }
-        }
-
-        jcb_FormatoImpresion.removeAllItems();
-        for (AbstractComprobante o : list) {
-            jcb_FormatoImpresion.addItem(o);
-        }
+        /// Consultar Formatos disponibles para el Sistem (Tipo Comprobante)
+//        List<FormatoComprobanteDto> list = AbstractComprobante.getListaFormatosComprobantes(sistema);
+//        
+//        jcb_FormatoVistaPrevia.removeAllItems();
+//        for (FormatoComprobanteDto o : list) {
+//            if (o.getTipoSalida() == TipoSalida.GRAFICA) {
+//                jcb_FormatoVistaPrevia.addItem(o);
+//            }
+//        }
+//
+//        jcb_FormatoImpresion.removeAllItems();
+//        for (AbstractComprobante o : list) {
+//            jcb_FormatoImpresion.addItem(o);
+//        }
     }
 
     private void chequearDatosIngresados() throws SgException {
-        AbstractComprobante formatoImpresion = (AbstractComprobante) jcb_FormatoImpresion.getSelectedItem();
-        AbstractComprobante formatoVistaPrevia = (AbstractComprobante) jcb_FormatoVistaPrevia.getSelectedItem();
+        FormatoComprobanteDto formatoImpresion = (FormatoComprobanteDto) jcb_FormatoImpresion.getSelectedItem();
+        FormatoComprobanteDto formatoVistaPrevia = (FormatoComprobanteDto) jcb_FormatoVistaPrevia.getSelectedItem();
 
         List<Comprobante> listComprobaantes = getListTiposComprobantes();
 
         List<Comprobante> listNoSoportados = new ArrayList<>();
 
-        for (Comprobante tcIngresados : listComprobaantes) {
-            if (!formatoImpresion.comprobanteEstaSoportado(tcIngresados)) {
-                listNoSoportados.add(tcIngresados);
-            }
-        }
-
+//        for (Comprobante tcIngresados : listComprobaantes) {
+//            if (!formatoImpresion.comprobanteEstaSoportado(tcIngresados)) {
+//                listNoSoportados.add(tcIngresados);
+//            }
+//        }
         if (listNoSoportados.size() > 0) {
             String msg = "El/Los Tipos de comprobantes ";
 
@@ -247,12 +244,11 @@ public class FromContadores extends javax.swing.JPanel {
             throw new SgException(msg);
         }
 
-        for (Comprobante tcIngresados : listComprobaantes) {
-            if (!formatoVistaPrevia.comprobanteEstaSoportado(tcIngresados)) {
-                listNoSoportados.add(tcIngresados);
-            }
-        }
-
+//        for (Comprobante tcIngresados : listComprobaantes) {
+//            if (!formatoVistaPrevia.comprobanteEstaSoportado(tcIngresados)) {
+//                listNoSoportados.add(tcIngresados);
+//            }
+//        }
         if (listNoSoportados.size() > 0) {
             String msg = "El/Los Tipos de comprobantes ";
 
@@ -323,7 +319,6 @@ public class FromContadores extends javax.swing.JPanel {
         jLabel2.setText("ID:");
 
         jCheckBox1.setText("Activo");
-        jCheckBox1.setOpaque(false);
         jCheckBox1.setPreferredSize(new java.awt.Dimension(55, 20));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -398,7 +393,6 @@ public class FromContadores extends javax.swing.JPanel {
         jLabel9.setText("Al Generar Comprobante:");
 
         jCheckBox4.setText("Permite Cambiar Fecha");
-        jCheckBox4.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -465,7 +459,6 @@ public class FromContadores extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(255, 255, 204));
 
         jCheckBox2.setText("Autoincremente Numeracion");
-        jCheckBox2.setOpaque(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Numero Actual:");
@@ -595,8 +588,8 @@ public class FromContadores extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JComboBox<ComportamientoEmisionComprobante> jcb_ComportamientoEmisionComprobante;
-    private javax.swing.JComboBox<AbstractComprobante> jcb_FormatoImpresion;
-    private javax.swing.JComboBox<AbstractComprobante> jcb_FormatoVistaPrevia;
+    private javax.swing.JComboBox<FormatoComprobanteDto> jcb_FormatoImpresion;
+    private javax.swing.JComboBox<FormatoComprobanteDto> jcb_FormatoVistaPrevia;
     private javax.swing.JComboBox<Sistema> jcb_tiposContador;
     private javax.swing.JFormattedTextField jfCopias;
     private javax.swing.JTextField jtf_pathImpresora;
@@ -608,9 +601,9 @@ public class FromContadores extends javax.swing.JPanel {
     }
 
     private void actualizarEstadoCheckBox() {
-        AbstractComprobante formato = (AbstractComprobante) jcb_FormatoImpresion.getSelectedItem();
+        FormatoComprobanteDto formato = (FormatoComprobanteDto) jcb_FormatoImpresion.getSelectedItem();
         if (formato == null
-                || formato.getTipoSalida() == TipoSalida.GRAFICA) {
+                || formato.getTipoSalida() == TipoSalida.GRAFICA.getId()) {
             jtf_pathImpresora.setEnabled(false);
         } else {
             jtf_pathImpresora.setEnabled(true);
@@ -639,15 +632,15 @@ public class FromContadores extends javax.swing.JPanel {
                 listTC.add(model.get(x));
             }
 
-            GsyContadores con = controladorService.guardarDto(tmpContador, listTC);
-
-            if (con != null) {
-                setCurrentRecord(con);
-                if (agrego) {
-                    DefaultMutableTreeNode hijo = new DefaultMutableTreeNode(con);
-                    modelo.insertNodeInto(hijo, dmtn, 0);
-                }
-            }
+//            GsyContadores con = controladorService.guardarDto(tmpContador, listTC);
+//
+//            if (con != null) {
+//                setCurrentRecord(con);
+//                if (agrego) {
+//                    DefaultMutableTreeNode hijo = new DefaultMutableTreeNode(con);
+//                    modelo.insertNodeInto(hijo, dmtn, 0);
+//                }
+//            }
             Toast.show("Datos del Contador Guardado");
         } catch (SgException ex) {
             LOG.log(Level.SEVERE, null, ex);

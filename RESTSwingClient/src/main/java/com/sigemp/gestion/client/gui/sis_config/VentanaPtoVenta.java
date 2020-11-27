@@ -13,7 +13,7 @@ import com.sigemp.gestion.client.services.GsySucService;
 import com.sigemp.gestion.client.services.GsyTalonariosService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.common.exception.SgException;
-import com.sigemp.gestion.client.gui.sis_config.form.FromPtoVta;
+import com.sigemp.gestion.client.gui.sis_config.form.FormVtoVta;
 import com.sigemp.gestion.client.services.ventanaPtoVenta.PtoVtaService;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorTipoDto;
@@ -297,7 +297,7 @@ public class VentanaPtoVenta extends SgJInternalFrame {
         if (o instanceof PtoVtaDto) {
             PtoVtaDto gsyTalonarios = (PtoVtaDto) o;
             //cargarContadores(dmtn, gsyTalonarios);
-            FromPtoVta form = new FromPtoVta();
+            FormVtoVta form = new FormVtoVta();
             form.setId(gsyTalonarios.getPtoVta());
             setPanelView(form);
             return;

@@ -44,7 +44,7 @@ import javax.swing.JOptionPane;
  *
  * @author CRISTIANE
  */
-public class FromPtoVta extends javax.swing.JPanel {
+public class FormVtoVta extends javax.swing.JPanel {
 
 //    private final ControladorStkDepositos controladorDepositos = DAOFactory.getDaoStkDepositos();
     private final GsyTalonarioService controladorTalonarios = ServiceFactory.getGsyTalonario();
@@ -125,7 +125,7 @@ public class FromPtoVta extends javax.swing.JPanel {
     /**
      * Creates new form PanelTalonariosForm
      */
-    public FromPtoVta() {
+    public FormVtoVta() {
 
         initComponents();
 
@@ -157,9 +157,33 @@ public class FromPtoVta extends javax.swing.JPanel {
                 jcSucursal.addItem(s);
             }
         } catch (Exception ex) {
-            Logger.getLogger(FromPtoVta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormVtoVta.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
 
 //        } catch (SgException ex) {
 //            LOG.log(Level.SEVERE, null, ex);
@@ -211,7 +235,7 @@ public class FromPtoVta extends javax.swing.JPanel {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(10, 5, 60, 20);
         jPanel2.add(jFormattedTextField1);
-        jFormattedTextField1.setBounds(75, 5, 110, 20);
+        jFormattedTextField1.setBounds(75, 5, 110, 22);
 
         jCheckBox1.setText("Activo");
         jCheckBox1.setMaximumSize(new java.awt.Dimension(55, 20));
@@ -225,7 +249,7 @@ public class FromPtoVta extends javax.swing.JPanel {
         jPanel2.add(jLabel3);
         jLabel3.setBounds(10, 30, 60, 20);
         jPanel2.add(jtDescripcion);
-        jtDescripcion.setBounds(75, 31, 300, 20);
+        jtDescripcion.setBounds(75, 31, 300, 22);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Sucursal:");
@@ -239,7 +263,7 @@ public class FromPtoVta extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jcSucursal);
-        jcSucursal.setBounds(75, 55, 300, 20);
+        jcSucursal.setBounds(75, 55, 300, 22);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Deposito:");
@@ -247,7 +271,7 @@ public class FromPtoVta extends javax.swing.JPanel {
         jPanel2.add(jLabel9);
         jLabel9.setBounds(10, 80, 60, 20);
         jPanel2.add(jcDeposito);
-        jcDeposito.setBounds(75, 80, 300, 20);
+        jcDeposito.setBounds(75, 80, 300, 22);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setLayout(null);
@@ -258,7 +282,7 @@ public class FromPtoVta extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jcMarca);
-        jcMarca.setBounds(115, 5, 100, 20);
+        jcMarca.setBounds(115, 5, 100, 22);
 
         jcModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -266,13 +290,13 @@ public class FromPtoVta extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jcModelo);
-        jcModelo.setBounds(115, 30, 100, 20);
+        jcModelo.setBounds(115, 30, 100, 22);
 
         jPanel1.add(jcPuertos);
-        jcPuertos.setBounds(115, 55, 100, 20);
+        jcPuertos.setBounds(115, 55, 100, 22);
 
         jPanel1.add(jcBaudios);
-        jcBaudios.setBounds(115, 80, 100, 20);
+        jcBaudios.setBounds(115, 80, 100, 22);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Modelo:");
@@ -478,7 +502,7 @@ public class FromPtoVta extends javax.swing.JPanel {
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(FromPtoVta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormVtoVta.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -517,7 +541,7 @@ public class FromPtoVta extends javax.swing.JPanel {
         }
     }
 
-    private static final Logger LOG = Logger.getLogger(FromPtoVta.class.getName());
+    private static final Logger LOG = Logger.getLogger(FormVtoVta.class.getName());
 
     private void guardarDatos() throws SgException {
 //        GsyTalonarios tal = controladorTalonarios.editDto(currentRecord);

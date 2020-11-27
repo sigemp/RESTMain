@@ -1,3 +1,5 @@
+package com.sigemp.gestion.client.gui.sis_config.form;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,8 +12,10 @@
  */
 
 
+
 import com.sigemp.gestion.client.gui.component.base.SgDialog;
 import com.sigemp.gestion.constants.Comprobante;
+import com.sigemp.gestion.constants.Sistema;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,9 +27,9 @@ import javax.swing.JFrame;
  *
  * @author cristiane
  */
-public class DialogGsyContadoresComprobantes extends SgDialog {
+public class DialogSeleccionComprobantes extends SgDialog {
 
-    private static final Logger LOG = Logger.getLogger(DialogGsyContadoresComprobantes.class.getName());
+    private static final Logger LOG = Logger.getLogger(DialogSeleccionComprobantes.class.getName());
 
     protected boolean confirmed = false;
     private final DefaultListModel<Comprobante> model = new DefaultListModel<>();;
@@ -50,30 +54,21 @@ public class DialogGsyContadoresComprobantes extends SgDialog {
 
     /**
      * Creates new form Beneficiarios
-     * @param jframe
+     * @param parent
      * @param modal
      */
-    public DialogGsyContadoresComprobantes() {
-        super(true);
+  public DialogSeleccionComprobantes(JDialog parent, boolean modal) {
+        super(parent, modal);
 
         initComponents();
 
-        setSize(415, 350);
+        //setSize(415, 350);
         
         jList1.setModel(model);
         jList1.setCellRenderer(new ListadosRender());
 
     }
     
-    public DialogGsyContadoresComprobantes(JDialog parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-    
-    public DialogGsyContadoresComprobantes(JFrame jframe, boolean modal) {
-        super(jframe, modal);
-        initComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

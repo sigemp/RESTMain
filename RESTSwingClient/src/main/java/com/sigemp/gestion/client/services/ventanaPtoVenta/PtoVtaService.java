@@ -37,6 +37,10 @@ public class PtoVtaService extends RESTService {
         }
     }
 
+    public List<Integer> getComprobantesByContador(Integer tipoContador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public List<GsyTalonarios> getDtoList() throws SgException {
         throw new SgException("No Implementado");
     }

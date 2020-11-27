@@ -130,7 +130,7 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
             cq.where(cb.equal(pet.get("talId").get("talId"), ptoVta));
         }
 
-        List<GsyContadores> listContadores = getEntityManager().createQuery(cq).getResultList();;
+        List<GsyContadores> listContadores = getEntityManager().createQuery(cq).getResultList();
 
         List<GsyContadorDto> listDto = new ArrayList<>();
         for (GsyContadores contador : listContadores) {
@@ -150,6 +150,7 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
      * Retorna una estructura con los Puntos de ventas,sus contadores y
      * comprobantes
      *
+     * @param contadorId
      * @return
      */
     public List<GsyContadorTipoDto> contadoresTipoList(Integer contadorId) {

@@ -12,6 +12,7 @@ package com.sigemp.gestion.shared.dto.ventanaPtoVenta;
 public class FormatoComprobanteDto {
     private Integer id;
     private String des;
+    private Integer tipoSalida;
 
     public FormatoComprobanteDto(int id, String des) {
         this.id = id;
@@ -44,5 +45,19 @@ public class FormatoComprobanteDto {
      */
     public void setDes(String des) {
         this.des = des;
+    }
+
+    /**
+     * @return the tipoSalida
+     */
+    public Integer getTipoSalida() {
+        return tipoSalida;
+    }
+
+    /**
+     * @param tipoSalida the tipoSalida to set
+     */
+    public void setTipoSalida(Integer tipoSalida) {
+        this.tipoSalida = tipoSalida;
     }
 }

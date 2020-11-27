@@ -7,7 +7,8 @@ package com.sigemp.gestion.client.gui.component.base;
 
 import com.sigemp.gestion.client.gui.sis_config.VentanaPtoVenta;
 import com.sigemp.gestion.client.gui.sis_general.WABMGsyProv;
-import com.sigemp.constants.Sistema;
+import com.sigemp.gestion.constants.Sistema;
+
 
 /**
  *
