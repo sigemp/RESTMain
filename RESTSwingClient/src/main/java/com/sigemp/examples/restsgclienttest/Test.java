@@ -5,7 +5,7 @@
  */
 package com.sigemp.examples.restsgclienttest;
 
-import com.sigemp.gestion.shared.entity.GsyProv;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.client.Client;
@@ -34,13 +34,13 @@ public class Test {
 
         WebTarget target = client.target(getBaseURI());
         // Get XML
-        List<GsyProv> list = (List<GsyProv>)  target
+        List<GsyProvDto> list = (List<GsyProvDto>)  target
                 .path("gsyprov")
                 .path("findAll")
                 .queryParam("des", "CATA")
                 .request()
                 .accept(MediaType.APPLICATION_XML)
-                .get(new GenericType<List<GsyProv>>() {  });
+                .get(new GenericType<List<GsyProvDto>>() {  });
         System.out.println(list);
         
 ////        xmlResponse = target

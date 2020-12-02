@@ -1,10 +1,13 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
 
+
+import com.sigemp.gestion.shared.dto.StkDepositosDto;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author cristian
  */
 @XmlRootElement
-public class GsyUser implements Serializable {
+public class GsyUserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer usrId;
@@ -22,16 +25,16 @@ public class GsyUser implements Serializable {
     private String nick;
     private String nom;
     private Integer talId;
-    private StkDepositos depoId;
+    private StkDepositosDto depoId;
 
-    public GsyUser() {
+    public GsyUserDto() {
     }
 
-    public GsyUser(Integer usrId) {
+    public GsyUserDto(Integer usrId) {
         this.usrId = usrId;
     }
 
-    public GsyUser(Integer usrId, boolean estado, String nick, String nom) {
+    public GsyUserDto(Integer usrId, boolean estado, String nick, String nom) {
         this.usrId = usrId;
         this.estado = estado;
         this.nick = nick;
@@ -88,11 +91,11 @@ public class GsyUser implements Serializable {
 
  
 
-    public StkDepositos getDepoId() {
+    public StkDepositosDto getDepoId() {
         return depoId;
     }
 
-    public void setDepoId(StkDepositos depoId) {
+    public void setDepoId(StkDepositosDto depoId) {
         this.depoId = depoId;
     }
 
@@ -106,10 +109,10 @@ public class GsyUser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsyUser)) {
+        if (!(object instanceof GsyUserDto)) {
             return false;
         }
-        GsyUser other = (GsyUser) object;
+        GsyUserDto other = (GsyUserDto) object;
         if ((this.usrId == null && other.usrId != null) || (this.usrId != null && !this.usrId.equals(other.usrId))) {
             return false;
         }

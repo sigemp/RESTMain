@@ -34,7 +34,9 @@ public class RESTService {
         SERVICE_DEPOSITOS ("stkdepositos"),
         SERVICE_SUCURSAL ("gsysuc"),
         SERVICE_TALONARIOS ("gsytalonarios"),
+        SERVICE_CONTADORES ("gsycontadores"),
         SERVICE_PANTALLA_PTOVTA ("ptovta"),
+        
         ;
 
         private String param;

@@ -8,7 +8,7 @@ package com.sigemp.gestion.client.gui.sis_general.form;
 import com.sigemp.gestion.client.gui.component.base.CRUD;
 import com.sigemp.gestion.client.gui.component.base.SgDialog;
 import com.sigemp.common.U;
-import com.sigemp.gestion.shared.entity.GsyProv;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -22,7 +22,7 @@ public class FormGsyProv extends SgDialog {
 
     private boolean confirmed = false;
     private CRUD crud;
-    private GsyProv reccordGsyProv;
+    private GsyProvDto reccordGsyProv;
 
     /**
      * Creates new form NewABMGsyProv
@@ -40,7 +40,7 @@ public class FormGsyProv extends SgDialog {
         initComponents();
     }
 
-    private void chequear(GsyProv cus) throws Exception {
+    private void chequear(GsyProvDto cus) throws Exception {
 
         if (cus.getDes().length() == 0) {
             throw new Exception("Ingreso un nombre");
@@ -48,16 +48,16 @@ public class FormGsyProv extends SgDialog {
 
     }
 
-    public GsyProv getRecord() {
+    public GsyProvDto getRecord() {
         return reccordGsyProv;
     }
 
-    private GsyProv getFromScreen() {
+    private GsyProvDto getFromScreen() {
         Integer id = U.getSwingUtil().getInt(jtId);
 
         String descripcion = jtDescripcion.getText();
 
-        GsyProv cus = new GsyProv();
+        GsyProvDto cus = new GsyProvDto();
         cus.setProvId(id);
 
         cus.setDes(descripcion);
@@ -150,7 +150,7 @@ public class FormGsyProv extends SgDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            GsyProv cus = getFromScreen();
+            GsyProvDto cus = getFromScreen();
             chequear(cus);
             reccordGsyProv = cus;
             setConfirmed(true);
@@ -189,7 +189,7 @@ public class FormGsyProv extends SgDialog {
         this.confirmed = confirmed;
     }
 
-    public void setRecord(GsyProv customer, CRUD crud) {
+    public void setRecord(GsyProvDto customer, CRUD crud) {
         this.reccordGsyProv = customer;
         this.crud = crud;
 

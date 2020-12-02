@@ -6,8 +6,8 @@
 package com.sigemp.gestion.client.services;
 
 import com.sigemp.common.exception.SgException;
-import com.sigemp.gestion.shared.entity.GsySuc;
-import com.sigemp.gestion.shared.entity.StkDepositos;
+import com.sigemp.gestion.shared.dto.GsySucDto;
+import com.sigemp.gestion.shared.dto.StkDepositosDto;
 import java.util.List;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -23,14 +23,14 @@ public class StkDepositoService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_DEPOSITOS.getParam());
 
-     public List<StkDepositos> getAll() throws Exception {
+     public List<StkDepositosDto> getAll() throws Exception {
         try {
             Response res = target
                     //.path("ptovtas")
                     .request()
                     .accept(MediaType.APPLICATION_JSON)
                     .get();
-            List<StkDepositos> listCu = (List<StkDepositos>) res.readEntity(new GenericType<List<StkDepositos>>() {
+            List<StkDepositosDto> listCu = (List<StkDepositosDto>) res.readEntity(new GenericType<List<StkDepositosDto>>() {
             });
             return listCu;
         } catch (Exception ex) {
@@ -39,7 +39,7 @@ public class StkDepositoService extends RESTService {
         }
     }
      
-    public void create(StkDepositos entity) throws Exception {
+    public void create(StkDepositosDto entity) throws Exception {
         try {
             Response res = target
                     .request()
@@ -72,11 +72,11 @@ public class StkDepositoService extends RESTService {
         }
     }
 
-    public StkDepositos getNew() throws Exception {
+    public StkDepositosDto getNew() throws Exception {
         try {
-            StkDepositos res = target
+            StkDepositosDto res = target
                     .path("newentity")
-                    .request().get(StkDepositos.class);
+                    .request().get(StkDepositosDto.class);
 
             return res;
         } catch (Exception ex) {
@@ -84,7 +84,7 @@ public class StkDepositoService extends RESTService {
         }
     }
 
-    public void edit(StkDepositos entity) throws Exception {
+    public void edit(StkDepositosDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getDepoId().toString()) // el id del registro a editar
@@ -100,12 +100,12 @@ public class StkDepositoService extends RESTService {
 
     }
 
-    public StkDepositos find(long id) throws Exception {
+    public StkDepositosDto find(long id) throws Exception {
         try {
-            StkDepositos cu = target
+            StkDepositosDto cu = target
                     .path(String.valueOf(id))
                     .request()
-                    .get(StkDepositos.class);
+                    .get(StkDepositosDto.class);
             return cu;
         } catch (Exception ex) {
             throw new Exception(ex);

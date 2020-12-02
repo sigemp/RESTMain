@@ -6,8 +6,8 @@
 package com.sigemp.gestion.client.services;
 
 import com.sigemp.common.exception.SgException;
-import com.sigemp.gestion.shared.entity.GsyProv;
-import com.sigemp.gestion.shared.entity.GsySuc;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
+import com.sigemp.gestion.shared.dto.GsySucDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.client.WebTarget;
@@ -23,18 +23,18 @@ public class GsySucService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_SUCURSAL.getParam());
 
-    public List<GsySuc> getList() {
+    public List<GsySucDto> getList() {
         return new ArrayList<>();
     }
 
-     public List<GsySuc> getAll() throws Exception {
+     public List<GsySucDto> getAll() throws Exception {
         try {
             Response res = target
                     //.path("ptovtas")
                     .request()
                     .accept(MediaType.APPLICATION_JSON)
                     .get();
-            List<GsySuc> listCu = (List<GsySuc>) res.readEntity(new GenericType<List<GsySuc>>() {
+            List<GsySucDto> listCu = (List<GsySucDto>) res.readEntity(new GenericType<List<GsySucDto>>() {
             });
             return listCu;
         } catch (Exception ex) {

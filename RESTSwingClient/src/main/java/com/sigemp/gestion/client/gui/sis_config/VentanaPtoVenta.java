@@ -13,22 +13,20 @@ import com.sigemp.gestion.client.services.GsySucService;
 import com.sigemp.gestion.client.services.GsyTalonariosService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.common.exception.SgException;
+import com.sigemp.gestion.client.gui.sis_config.form.FormContadores;
 import com.sigemp.gestion.client.gui.sis_config.form.FormVtoVta;
 import com.sigemp.gestion.client.services.ventanaPtoVenta.PtoVtaService;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorTipoDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.PtoVtaDto;
-import com.sigemp.gestion.shared.entity.GsyContadores;
-import com.sigemp.gestion.shared.entity.GsyContadorestipos;
-import com.sigemp.gestion.shared.entity.GsySuc;
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
+import com.sigemp.gestion.shared.dto.GsyContadoresDto;
+import com.sigemp.gestion.shared.dto.GsyContadorestiposDto;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -37,7 +35,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -52,7 +49,6 @@ public class VentanaPtoVenta extends SgJInternalFrame {
     private final GsyContadoresService controladorContadores = ServiceFactory.getGsyContador();
     private final GsyContadoresTipoService controladorContadoresTipo = ServiceFactory.getGsyContadoresTipo();
     private final GsyTalonariosService controladorPuntoVenta = ServiceFactory.getGsyTalonarios();
-    private final GsySucService controladorSucursal = ServiceFactory.getGsySuc();
     private final PtoVtaService ptovtaService = ServiceFactory.getPtoVtaService();
 
     /**
@@ -252,21 +248,21 @@ public class VentanaPtoVenta extends SgJInternalFrame {
     }//GEN-LAST:event_jb_actualizarActionPerformed
 
     private void jb_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_agregarActionPerformed
-        try {
-            nuevo();
-        } catch (SgException ex) {
-            me(ex);
-            Logger.getLogger(VentanaPtoVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            nuevo();
+//        } catch (SgException ex) {
+//            me(ex);
+//            Logger.getLogger(VentanaPtoVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_jb_agregarActionPerformed
 
     private void jb_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_eliminarActionPerformed
-        try {
-            borrar();
-        } catch (SgException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+//        try {
+//            borrar();
+//        } catch (SgException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_jb_eliminarActionPerformed
 
     private void jb_templateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_templateActionPerformed
@@ -296,14 +292,14 @@ public class VentanaPtoVenta extends SgJInternalFrame {
     private void mostrar(Object o) throws Exception {
         if (o instanceof PtoVtaDto) {
             PtoVtaDto gsyTalonarios = (PtoVtaDto) o;
-            //cargarContadores(dmtn, gsyTalonarios);
             FormVtoVta form = new FormVtoVta();
-            form.setId(gsyTalonarios.getPtoVta());
             setPanelView(form);
-            return;
+            form.setId(gsyTalonarios.getPtoVta());
         } else if (o instanceof GsyContadorDto) {
             GsyContadorDto contador = (GsyContadorDto) o;
-            return;
+            FormContadores form = new FormContadores();
+            setPanelView(form);
+            form.setId(contador.getContadorId());
         }
 
     }
@@ -351,31 +347,31 @@ public class VentanaPtoVenta extends SgJInternalFrame {
         }
     }
 
-    private void nuevo() throws SgException {
-        TreePath tp = jTreeTalonarios.getSelectionModel().getSelectionPath();
-        if (tp != null) {
-            DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
-            if (dmtn.getUserObject() instanceof String) {
-                nuevoTalonario(dmtn);
-                return;
-            }
-            if (dmtn.getUserObject() instanceof GsyTalonarios) {
-                GsyTalonarios tal = (GsyTalonarios) dmtn.getUserObject();
-                nuevoContador(dmtn, tal);
-                return;
-            }
-        }
-    }
+//    private void nuevo() throws SgException {
+//        TreePath tp = jTreeTalonarios.getSelectionModel().getSelectionPath();
+//        if (tp != null) {
+//            DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
+//            if (dmtn.getUserObject() instanceof String) {
+//                nuevoTalonario(dmtn);
+//                return;
+//            }
+//            if (dmtn.getUserObject() instanceof GsyTalonarios) {
+//                GsyTalonarios tal = (GsyTalonarios) dmtn.getUserObject();
+//                nuevoContador(dmtn, tal);
+//                return;
+//            }
+//        }
+//    }
 
-    private void nuevoTalonario(DefaultMutableTreeNode dmtn) throws SgException {
-
-        GsyTalonarios e = controladorPuntoVenta.getDtoNew();
-//        FormTalonariosForm pdt = new FormTalonariosForm();
-//        pdt.setCurrentRecord(e);
-//////        pdt.setNode(dmtn, modelo);
+//    private void nuevoTalonario(DefaultMutableTreeNode dmtn) throws SgException {
 //
-//        setPanelView(pdt);
-    }
+//        GsyTalonarios e = controladorPuntoVenta.getDtoNew();
+////        FormTalonariosForm pdt = new FormTalonariosForm();
+////        pdt.setCurrentRecord(e);
+////////        pdt.setNode(dmtn, modelo);
+////
+////        setPanelView(pdt);
+//    }
 
     private void setPanelView(JComponent component) {
         jPanelDeFormulario.removeAll();
@@ -385,82 +381,82 @@ public class VentanaPtoVenta extends SgJInternalFrame {
         jPanelDeFormulario.updateUI();
     }
 
-    private void nuevoContador(DefaultMutableTreeNode dmtn, GsyTalonarios tal) {
-        DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
-        GsyContadores e = controladorContadores.getDtoNew();
-        e.setTalId(tal);
+////    private void nuevoContador(DefaultMutableTreeNode dmtn, GsyTalonarios tal) {
+////        DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
+////        GsyContadores e = controladorContadores.getDtoNew();
+////        e.setTalId(tal);
+////
+//////        FormContadores pdt = new FormContadores();
+//////        pdt.setCurrentRecord(e);
+//////        pdt.setNode(dmtn, modelo);
+//////
+//////        setPanelView(pdt);
+////    }
 
-//        FormContadores pdt = new FormContadores();
-//        pdt.setCurrentRecord(e);
-//        pdt.setNode(dmtn, modelo);
+//    private void borrar() throws SgException {
+//        int x = JOptionPane.showConfirmDialog(this, "Esta Seguro de Borrar el item Seleccionado?", "Borrar", JOptionPane.YES_NO_OPTION);
+//        if (x != JOptionPane.YES_OPTION) {
+//            return;
+//        }
+//        TreePath tp = jTreeTalonarios.getSelectionModel().getSelectionPath();
 //
-//        setPanelView(pdt);
-    }
+//        if (tp != null) {
+//            DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
+//            if (dmtn.getUserObject() instanceof GsyTalonarios) {
+//                deleteGsyTalonario(dmtn);
+//                return;
+//            }
+//            if (dmtn.getUserObject() instanceof GsyContadores) {
+//                deleteGsyContadores(dmtn);
+//                return;
+//            }
+//            if (dmtn.getUserObject() instanceof GsyContadorestipos) {
+//                deleteComprobantes(dmtn);
+//            }
+//        }
+//    }
 
-    private void borrar() throws SgException {
-        int x = JOptionPane.showConfirmDialog(this, "Esta Seguro de Borrar el item Seleccionado?", "Borrar", JOptionPane.YES_NO_OPTION);
-        if (x != JOptionPane.YES_OPTION) {
-            return;
-        }
-        TreePath tp = jTreeTalonarios.getSelectionModel().getSelectionPath();
+//    private void deleteComprobantes(DefaultMutableTreeNode dmtn) {
+//        if (dmtn.getUserObject() instanceof GsyContadorestipos) {
+//            DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
+//            GsyContadorestipos con = (GsyContadorestipos) dmtn.getUserObject();
+//            controladorContadoresTipo.delete(con);
+//            modelo.removeNodeFromParent(dmtn);
+//        }
+//    }
 
-        if (tp != null) {
-            DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
-            if (dmtn.getUserObject() instanceof GsyTalonarios) {
-                deleteGsyTalonario(dmtn);
-                return;
-            }
-            if (dmtn.getUserObject() instanceof GsyContadores) {
-                deleteGsyContadores(dmtn);
-                return;
-            }
-            if (dmtn.getUserObject() instanceof GsyContadorestipos) {
-                deleteComprobantes(dmtn);
-            }
-        }
-    }
+//    private void deleteGsyContadores(DefaultMutableTreeNode dmtn) {
+//        if (dmtn.getUserObject() instanceof GsyContadores) {
+//            DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
+//            GsyContadores con = (GsyContadores) dmtn.getUserObject();
+//            List<DefaultMutableTreeNode> lista = new ArrayList<>();
+//            for (int x = 0; x < dmtn.getChildCount(); x++) {
+//                lista.add((DefaultMutableTreeNode) dmtn.getChildAt(x));
+//            }
+//            lista.stream().forEach((node) -> {
+//                deleteComprobantes(node);
+//            });
+//            controladorContadores.delete(con);
+//            modelo.removeNodeFromParent(dmtn);
+//
+//        }
+//    }
 
-    private void deleteComprobantes(DefaultMutableTreeNode dmtn) {
-        if (dmtn.getUserObject() instanceof GsyContadorestipos) {
-            DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
-            GsyContadorestipos con = (GsyContadorestipos) dmtn.getUserObject();
-            controladorContadoresTipo.delete(con);
-            modelo.removeNodeFromParent(dmtn);
-        }
-    }
-
-    private void deleteGsyContadores(DefaultMutableTreeNode dmtn) {
-        if (dmtn.getUserObject() instanceof GsyContadores) {
-            DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
-            GsyContadores con = (GsyContadores) dmtn.getUserObject();
-            List<DefaultMutableTreeNode> lista = new ArrayList<>();
-            for (int x = 0; x < dmtn.getChildCount(); x++) {
-                lista.add((DefaultMutableTreeNode) dmtn.getChildAt(x));
-            }
-            lista.stream().forEach((node) -> {
-                deleteComprobantes(node);
-            });
-            controladorContadores.delete(con);
-            modelo.removeNodeFromParent(dmtn);
-
-        }
-    }
-
-    private void deleteGsyTalonario(DefaultMutableTreeNode dmtn) throws SgException {
-
-        DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
-        GsyTalonarios con = (GsyTalonarios) dmtn.getUserObject();
-        List<DefaultMutableTreeNode> lista = new ArrayList<>();
-        for (int x = 0; x < dmtn.getChildCount(); x++) {
-            lista.add((DefaultMutableTreeNode) dmtn.getChildAt(x));
-        }
-        lista.stream().forEach((node) -> {
-            deleteComprobantes(node);
-        });
-        controladorPuntoVenta.deletePtoVta(con.getTalId());
-        modelo.removeNodeFromParent(dmtn);
-
-    }
+//    private void deleteGsyTalonario(DefaultMutableTreeNode dmtn) throws SgException {
+//
+//        DefaultTreeModel modelo = (DefaultTreeModel) jTreeTalonarios.getModel();
+//        GsyTalonarios con = (GsyTalonarios) dmtn.getUserObject();
+//        List<DefaultMutableTreeNode> lista = new ArrayList<>();
+//        for (int x = 0; x < dmtn.getChildCount(); x++) {
+//            lista.add((DefaultMutableTreeNode) dmtn.getChildAt(x));
+//        }
+//        lista.stream().forEach((node) -> {
+//            deleteComprobantes(node);
+//        });
+//        controladorPuntoVenta.deletePtoVta(con.getTalId());
+//        modelo.removeNodeFromParent(dmtn);
+//
+//    }
 
     private static final Logger LOG = Logger.getLogger(VentanaPtoVenta.class.getName());
 

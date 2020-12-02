@@ -5,7 +5,7 @@
  */
 package com.sigemp.gestion.client.services;
 
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
@@ -18,7 +18,7 @@ public class GsyTalonarioService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_TALONARIO.getParam());
 
-    public void create(GsyTalonarios entity) throws Exception {
+    public void create(GsyTalonariosDto entity) throws Exception {
         try {
             Response res = target
                     .request()
@@ -51,11 +51,11 @@ public class GsyTalonarioService extends RESTService {
         }
     }
 
-    public GsyTalonarios getNew() throws Exception {
+    public GsyTalonariosDto getNew() throws Exception {
         try {
-            GsyTalonarios res = target
+            GsyTalonariosDto res = target
                     .path("newentity")
-                    .request().get(GsyTalonarios.class);
+                    .request().get(GsyTalonariosDto.class);
 
             return res;
         } catch (Exception ex) {
@@ -63,7 +63,7 @@ public class GsyTalonarioService extends RESTService {
         }
     }
 
-    public void edit(GsyTalonarios entity) throws Exception {
+    public void edit(GsyTalonariosDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getTalId().toString()) // el id del registro a editar
@@ -79,12 +79,12 @@ public class GsyTalonarioService extends RESTService {
 
     }
 
-    public GsyTalonarios find(long id) throws Exception {
+    public GsyTalonariosDto find(long id) throws Exception {
         try {
-            GsyTalonarios cu = target
+            GsyTalonariosDto cu = target
                     .path(String.valueOf(id))
                     .request()
-                    .get(GsyTalonarios.class);
+                    .get(GsyTalonariosDto.class);
             return cu;
         } catch (Exception ex) {
             throw new Exception(ex);

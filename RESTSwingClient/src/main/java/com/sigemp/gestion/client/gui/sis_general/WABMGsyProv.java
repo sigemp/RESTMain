@@ -15,7 +15,7 @@ import com.sigemp.gestion.client.gui.component.base.SgJInternalFrame;
 import com.sigemp.gestion.client.gui.sis_general.form.FormGsyProv;
 import com.sigemp.gestion.client.services.GsyProvService;
 import com.sigemp.client.dto.PageableWrapper;
-import com.sigemp.gestion.shared.entity.GsyProv;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -77,11 +77,11 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
             FormGsyProv abm = new FormGsyProv(frame, false);
             switch (cur) {
                 case ALTA: {
-                    GsyProv entity = service.getNew();
+                    GsyProvDto entity = service.getNew();
                     abm.setRecord(entity, cur);
                     abm.setVisible(true);
                     if (abm.isConfirmed()) {
-                        GsyProv cusadd = abm.getRecord();
+                        GsyProvDto cusadd = abm.getRecord();
                         service.create(cusadd);
                         dm.addRow(cusadd);
                     }
@@ -90,18 +90,18 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
                 case BAJA: {
                     int x = JOptionPane.showConfirmDialog(this, "Elimina?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
                     if (x == JOptionPane.YES_OPTION) {
-                        GsyProv entity = getCurrentRecortd();
+                        GsyProvDto entity = getCurrentRecortd();
                         service.remove(entity.getProvId());
                         dm.removeRow(entity);
                     }
                     break;
                 }
                 case MODIFICACION: {
-                    GsyProv entity = getCurrentRecortd();
+                    GsyProvDto entity = getCurrentRecortd();
                     abm.setRecord(entity, cur);
                     abm.setVisible(true);
                     if (abm.isConfirmed()) {
-                        GsyProv cusadd = abm.getRecord();
+                        GsyProvDto cusadd = abm.getRecord();
                         service.edit(cusadd);
                         dm.refresh(entity, cusadd);
                     }
@@ -126,9 +126,9 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
                 map.put("des", des);
             }
 
-            PageableWrapper<GsyProv> pag = service.getList(map, pageableButton.getCurrentFirstRecord(), pageableButton.getSizeQuery());
+            PageableWrapper<GsyProvDto> pag = service.getList(map, pageableButton.getCurrentFirstRecord(), pageableButton.getSizeQuery());
 
-            List<GsyProv> list = pag.getList();
+            List<GsyProvDto> list = pag.getList();
 
             pageableButton.setCountRecord(pag.getCount());
 
@@ -141,11 +141,11 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
         }
     }
 
-    private GsyProv getCurrentRecortd() throws Exception {
+    private GsyProvDto getCurrentRecortd() throws Exception {
         int x = jTable1.getSelectedRow();
         if (x > -1) {
             x = jTable1.convertRowIndexToModel(x);
-            GsyProv cu = dm.getRow(x);
+            GsyProvDto cu = dm.getRow(x);
             //GsyProv cus = customerService.find(cu.getId());
             return cu;
         }
@@ -166,7 +166,7 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
         }
     }
 
-    class GsyProvModel extends ListTableModel<GsyProv> {
+    class GsyProvModel extends ListTableModel<GsyProvDto> {
 
         public GsyProvModel(String[] columnNames) {
             super(columnNames);
@@ -191,7 +191,7 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
 
         @Override
         public Object getValueAt(int row, int column) {
-            GsyProv e = getRow(row);
+            GsyProvDto e = getRow(row);
             ColumName cn = ColumName.values()[column];
             switch (cn) {
                 case ID:

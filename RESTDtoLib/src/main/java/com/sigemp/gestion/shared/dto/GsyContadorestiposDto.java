@@ -1,9 +1,11 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
+
 
 import java.io.Serializable;
 
@@ -11,17 +13,17 @@ import java.io.Serializable;
  *
  * @author cristian
  */
-public class GsyContadorestipos implements Serializable {
+public class GsyContadorestiposDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer tipoId;
-    private GsyContadores conId;
+    private GsyContadoresDto conId;
     private Integer tcId;
 
-    public GsyContadorestipos() {
+    public GsyContadorestiposDto() {
     }
 
-    public GsyContadorestipos(Integer tipoId) {
+    public GsyContadorestiposDto(Integer tipoId) {
         this.tipoId = tipoId;
     }
 
@@ -33,11 +35,11 @@ public class GsyContadorestipos implements Serializable {
         this.tipoId = tipoId;
     }
 
-    public GsyContadores getConId() {
+    public GsyContadoresDto getConId() {
         return conId;
     }
 
-    public void setConId(GsyContadores conId) {
+    public void setConId(GsyContadoresDto conId) {
         this.conId = conId;
     }
 
@@ -59,10 +61,10 @@ public class GsyContadorestipos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsyContadorestipos)) {
+        if (!(object instanceof GsyContadorestiposDto)) {
             return false;
         }
-        GsyContadorestipos other = (GsyContadorestipos) object;
+        GsyContadorestiposDto other = (GsyContadorestiposDto) object;
         if ((this.tipoId == null && other.tipoId != null) || (this.tipoId != null && !this.tipoId.equals(other.tipoId))) {
             return false;
         }

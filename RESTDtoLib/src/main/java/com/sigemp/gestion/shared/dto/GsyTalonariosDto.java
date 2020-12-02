@@ -1,17 +1,20 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
 
+
+import com.sigemp.gestion.shared.dto.StkDepositosDto;
 import java.io.Serializable;
 
 /**
  *
  * @author cristian
  */
-public class GsyTalonarios implements Serializable {
+public class GsyTalonariosDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer talId;
@@ -22,16 +25,16 @@ public class GsyTalonarios implements Serializable {
     private String ifmarca;
     private String ifmodelo;
     private Integer ifpuerto;
-    private StkDepositos depoId;
+    private StkDepositosDto depoId;
 
-    public GsyTalonarios() {
+    public GsyTalonariosDto() {
     }
 
-    public GsyTalonarios(Integer talId) {
+    public GsyTalonariosDto(Integer talId) {
         this.talId = talId;
     }
 
-    public GsyTalonarios(Integer talId, String des, boolean estado) {
+    public GsyTalonariosDto(Integer talId, String des, boolean estado) {
         this.talId = talId;
         this.des = des;
         this.estado = estado;
@@ -101,11 +104,11 @@ public class GsyTalonarios implements Serializable {
         this.ifpuerto = ifpuerto;
     }
 
-    public StkDepositos getDepoId() {
+    public StkDepositosDto getDepoId() {
         return depoId;
     }
 
-    public void setDepoId(StkDepositos depoId) {
+    public void setDepoId(StkDepositosDto depoId) {
         this.depoId = depoId;
     }
 
@@ -119,10 +122,10 @@ public class GsyTalonarios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsyTalonarios)) {
+        if (!(object instanceof GsyTalonariosDto)) {
             return false;
         }
-        GsyTalonarios other = (GsyTalonarios) object;
+        GsyTalonariosDto other = (GsyTalonariosDto) object;
         if ((this.talId == null && other.talId != null) || (this.talId != null && !this.talId.equals(other.talId))) {
             return false;
         }

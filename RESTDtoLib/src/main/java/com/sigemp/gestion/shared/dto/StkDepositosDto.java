@@ -1,9 +1,11 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
+
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,22 +15,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author cristian
  */
 @XmlRootElement
-public class StkDepositos implements Serializable {
+public class StkDepositosDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer depoId;
     private String des;
     private boolean estado;
-    private GsySuc sucId;
+    private GsySucDto sucId;
 
-    public StkDepositos() {
+    public StkDepositosDto() {
     }
 
-    public StkDepositos(Integer depoId) {
+    public StkDepositosDto(Integer depoId) {
         this.depoId = depoId;
     }
 
-    public StkDepositos(Integer depoId, String des, boolean estado) {
+    public StkDepositosDto(Integer depoId, String des, boolean estado) {
         this.depoId = depoId;
         this.des = des;
         this.estado = estado;
@@ -58,11 +60,11 @@ public class StkDepositos implements Serializable {
         this.estado = estado;
     }
 
-    public GsySuc getSucId() {
+    public GsySucDto getSucId() {
         return sucId;
     }
 
-    public void setSucId(GsySuc sucId) {
+    public void setSucId(GsySucDto sucId) {
         this.sucId = sucId;
     }
 
@@ -77,10 +79,10 @@ public class StkDepositos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof StkDepositos)) {
+        if (!(object instanceof StkDepositosDto)) {
             return false;
         }
-        StkDepositos other = (StkDepositos) object;
+        StkDepositosDto other = (StkDepositosDto) object;
         if ((this.depoId == null && other.depoId != null) || (this.depoId != null && !this.depoId.equals(other.depoId))) {
             return false;
         }

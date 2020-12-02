@@ -10,13 +10,19 @@ package com.sigemp.gestion.shared.dto.ventanaPtoVenta;
  * @author sigem
  */
 public class FormatoComprobanteDto {
+
     private Integer id;
     private String des;
     private Integer tipoSalida;
 
-    public FormatoComprobanteDto(int id, String des) {
+    public FormatoComprobanteDto() {
+
+    }
+
+    public FormatoComprobanteDto(int id, String des, Integer tipoSalida) {
         this.id = id;
         this.des = des;
+        this.tipoSalida = tipoSalida;
     }
 
     /**
@@ -59,5 +65,9 @@ public class FormatoComprobanteDto {
      */
     public void setTipoSalida(Integer tipoSalida) {
         this.tipoSalida = tipoSalida;
+    }
+    
+    public String toString() {
+        return des;
     }
 }

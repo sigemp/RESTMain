@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
+package com.sigemp.gestion.shared.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
  * @author cristian
  */
-public class GsyContadores implements Serializable {
+public class GsyContadoresDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer conId;
@@ -26,16 +27,17 @@ public class GsyContadores implements Serializable {
     private Integer formatioVistaPrevia;
     private Integer comportamientoEmisionComprobante;
     private Integer tipoContador;
-    private GsyTalonarios talId;
+    private Integer talId;
+    private ArrayList<Integer> comprobantes = new ArrayList<>();
 
-    public GsyContadores() {
+    public GsyContadoresDto() {
     }
 
-    public GsyContadores(Integer conId) {
+    public GsyContadoresDto(Integer conId) {
         this.conId = conId;
     }
 
-    public GsyContadores(Integer conId, boolean autoIncrementa, int cantidadCopias, String des, boolean estado, String impresoraDirecta, int nroactual, boolean permiteCambioFecha) {
+    public GsyContadoresDto(Integer conId, boolean autoIncrementa, int cantidadCopias, String des, boolean estado, String impresoraDirecta, int nroactual, boolean permiteCambioFecha) {
         this.conId = conId;
         this.autoIncrementa = autoIncrementa;
         this.cantidadCopias = cantidadCopias;
@@ -142,11 +144,11 @@ public class GsyContadores implements Serializable {
         this.tipoContador = tipoContador;
     }
 
-    public GsyTalonarios getTalId() {
+    public Integer getTalId() {
         return talId;
     }
 
-    public void setTalId(GsyTalonarios talId) {
+    public void setTalId(Integer talId) {
         this.talId = talId;
     }
 
@@ -160,10 +162,10 @@ public class GsyContadores implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsyContadores)) {
+        if (!(object instanceof GsyContadoresDto)) {
             return false;
         }
-        GsyContadores other = (GsyContadores) object;
+        GsyContadoresDto other = (GsyContadoresDto) object;
         if ((this.conId == null && other.conId != null) || (this.conId != null && !this.conId.equals(other.conId))) {
             return false;
         }
@@ -174,5 +176,19 @@ public class GsyContadores implements Serializable {
     public String toString() {
         return "com.sigemp.server.entity.GsyContadores[ conId=" + conId + " ]";
     }
-    
+
+    /**
+     * @return the comprobantes
+     */
+    public ArrayList<Integer> getComprobantes() {
+        return comprobantes;
+    }
+
+    /**
+     * @param comprobantes the comprobantes to set
+     */
+    public void setComprobantes(ArrayList<Integer> comprobantes) {
+        this.comprobantes = comprobantes;
+    }
+
 }

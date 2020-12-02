@@ -1,9 +1,11 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
+
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author cristian
  */
 @XmlRootElement
-public class GsySuc implements Serializable {
+public class GsySucDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer sucId;
@@ -21,14 +23,14 @@ public class GsySuc implements Serializable {
     private String dir;
     private String telefono;
 
-    public GsySuc() {
+    public GsySucDto() {
     }
 
-    public GsySuc(Integer sucId) {
+    public GsySucDto(Integer sucId) {
         this.sucId = sucId;
     }
 
-    public GsySuc(Integer sucId, String des, String dir, String telefono) {
+    public GsySucDto(Integer sucId, String des, String dir, String telefono) {
         this.sucId = sucId;
         this.des = des;
         this.dir = dir;
@@ -77,10 +79,10 @@ public class GsySuc implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsySuc)) {
+        if (!(object instanceof GsySucDto)) {
             return false;
         }
-        GsySuc other = (GsySuc) object;
+        GsySucDto other = (GsySucDto) object;
         if ((this.sucId == null && other.sucId != null) || (this.sucId != null && !this.sucId.equals(other.sucId))) {
             return false;
         }

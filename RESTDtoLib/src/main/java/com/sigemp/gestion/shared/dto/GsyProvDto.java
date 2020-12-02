@@ -1,29 +1,31 @@
+package com.sigemp.gestion.shared.dto;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigemp.gestion.shared.entity;
+
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class GsyProv implements Serializable {
+public class GsyProvDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer provId;
     private String des;
 //    private Collection<GsyLoc> gsyLocCollection;
 
-    public GsyProv() {
+    public GsyProvDto() {
     }
 
-    public GsyProv(Integer provId) {
+    public GsyProvDto(Integer provId) {
         this.provId = provId;
     }
 
-    public GsyProv(Integer provId, String des) {
+    public GsyProvDto(Integer provId, String des) {
         this.provId = provId;
         this.des = des;
     }
@@ -63,10 +65,10 @@ public class GsyProv implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GsyProv)) {
+        if (!(object instanceof GsyProvDto)) {
             return false;
         }
-        GsyProv other = (GsyProv) object;
+        GsyProvDto other = (GsyProvDto) object;
         if ((this.provId == null && other.provId != null) || (this.provId != null && !this.provId.equals(other.provId))) {
             return false;
         }

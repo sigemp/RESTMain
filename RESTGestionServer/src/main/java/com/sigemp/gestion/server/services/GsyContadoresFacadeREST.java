@@ -5,6 +5,7 @@
  */
 package com.sigemp.gestion.server.services;
 
+import com.sigemp.gestion.shared.dto.GsyContadoresDto;
 import com.sigemp.gestion.shared.entity.GsyContadores;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -58,8 +59,11 @@ public class GsyContadoresFacadeREST extends AbstractFacade<GsyContadores> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public GsyContadores find(@PathParam("id") Integer id) {
-        return super.find(id);
+    public GsyContadoresDto find(@PathParam("id") Integer id) {
+        GsyContadores entity = super.find(id);
+        GsyContadoresDto dto = new Convert().toDto(entity);
+
+        return dto;
     }
 
     @GET
@@ -87,5 +91,5 @@ public class GsyContadoresFacadeREST extends AbstractFacade<GsyContadores> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

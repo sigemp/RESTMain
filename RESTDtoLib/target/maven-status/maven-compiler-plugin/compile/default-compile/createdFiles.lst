@@ -4,11 +4,14 @@ com\sigemp\common\exception\SgArticuloException.class
 com\sigemp\gestion\constants\PrecioBase.class
 com\sigemp\gestion\constants\Sistema.class
 com\sigemp\gestion\constants\Comprobante.class
+com\sigemp\gestion\shared\dto\GsyContadorestiposDto.class
 com\sigemp\common\exception\SgPreventaException.class
 com\sigemp\gestion\shared\dto\ventanaPtoVenta\GsyContadorTipoDto.class
 com\sigemp\common\StringUtils.class
 com\sigemp\common\exception\SgTransaccionException.class
 com\sigemp\gestion\shared\dto\ventanaPtoVenta\GsyContadorDto.class
+com\sigemp\gestion\shared\dto\GsyProvDto.class
+com\sigemp\gestion\shared\dto\GsySucDto.class
 com\sigemp\gestion\constants\TiposIva.class
 com\sigemp\gestion\shared\dto\ventanaPtoVenta\OpcionesContadorDto.class
 com\sigemp\common\exception\SgFiscalException.class
@@ -18,6 +21,7 @@ com\sigemp\gestion\shared\dto\ventanaPtoVenta\FormatoComprobanteDto.class
 com\sigemp\common\exception\SgIntegridadException.class
 com\sigemp\gestion\constants\FiltroCobranzaSaldo.class
 com\sigemp\gestion\constants\TipoDocumento.class
+com\sigemp\gestion\shared\dto\GsyUserDto.class
 com\sigemp\gestion\constants\Comprobante$1.class
 com\sigemp\gestion\constants\Letra.class
 com\sigemp\gestion\constants\UnidadMedidas.class
@@ -26,9 +30,13 @@ com\sigemp\gestion\constants\EstadoCuentaFlag.class
 com\sigemp\gestion\constants\ArticuloFlag.class
 com\sigemp\gestion\constants\ComportamientoEmisionComprobante.class
 com\sigemp\gestion\constants\TipoSalida.class
+com\sigemp\gestion\shared\dto\GsyContadoresDto.class
 com\sigemp\gestion\shared\dto\ventanaPtoVenta\GsySucDto.class
+com\sigemp\gestion\shared\dto\StkDepositosDto.class
 com\sigemp\common\exception\SgException.class
+com\sigemp\common\generics\IntegerDto.class
 com\sigemp\gestion\constants\FiltroPedidos.class
+com\sigemp\gestion\shared\dto\GsyTalonariosDto.class
 com\sigemp\gestion\shared\dto\ventanaPtoVenta\PtoVtaDto.class
 com\sigemp\gestion\constants\CParametro.class
 com\sigemp\gestion\constants\VentasFlags.class

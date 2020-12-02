@@ -29,9 +29,9 @@ import com.sigemp.gestion.client.services.GsySucService;
 import com.sigemp.gestion.client.services.GsyTalonarioService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.gestion.client.services.StkDepositoService;
-import com.sigemp.gestion.shared.entity.GsySuc;
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
-import com.sigemp.gestion.shared.entity.StkDepositos;
+import com.sigemp.gestion.shared.dto.GsySucDto;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
+import com.sigemp.gestion.shared.dto.StkDepositosDto;
 import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.util.List;
@@ -54,7 +54,7 @@ public class FormVtoVta extends javax.swing.JPanel {
 //    private final ControladorGsySuc controladorSucursal = DAOFactory.getDaoGsySuc();
     private boolean confirmed = false;
     private CRUD crud;
-    protected GsyTalonarios currentRecord;
+    protected GsyTalonariosDto currentRecord;
     protected WrapperPtoVta wcurrentRecord;
 
     /**
@@ -62,7 +62,7 @@ public class FormVtoVta extends javax.swing.JPanel {
      *
      * @return the value of currentRecord
      */
-    public GsyTalonarios getCurrentRecord() {
+    public GsyTalonariosDto getCurrentRecord() {
         return currentRecord;
     }
 
@@ -71,9 +71,9 @@ public class FormVtoVta extends javax.swing.JPanel {
         //si existe
 
         if (id == null) {
-            setCurrentRecord(new GsyTalonarios(), CRUD.ALTA);
+            setCurrentRecord(new GsyTalonariosDto(), CRUD.ALTA);
         } else {
-            GsyTalonarios talonario = controladorTalonarios.find(id);
+            GsyTalonariosDto talonario = controladorTalonarios.find(id);
             setCurrentRecord(talonario, CRUD.MODIFICACION);
             // si no existe , laro error
         }
@@ -86,7 +86,7 @@ public class FormVtoVta extends javax.swing.JPanel {
      * @param currentRecord new value of currentRecord
      * @param crud
      */
-    public void setCurrentRecord(GsyTalonarios currentRecord, CRUD crud) {
+    public void setCurrentRecord(GsyTalonariosDto currentRecord, CRUD crud) {
         this.currentRecord = currentRecord;
         this.wcurrentRecord = WrapperPtoVta.instance(currentRecord);
         this.crud = crud;
@@ -105,9 +105,9 @@ public class FormVtoVta extends javax.swing.JPanel {
 
         jtDescripcion.setText(currentRecord.getDes());
 
-        StkDepositos dep = currentRecord.getDepoId();
+        StkDepositosDto dep = currentRecord.getDepoId();
         if (dep != null) {
-            GsySuc suc = dep.getSucId();
+            GsySucDto suc = dep.getSucId();
             jcSucursal.setSelectedItem(suc);
             actualizarDepositos();
             jcDeposito.setSelectedItem(dep);
@@ -151,9 +151,9 @@ public class FormVtoVta extends javax.swing.JPanel {
         SwingUtils.setSelectText(jtDescripcion);
 
         try {
-            List<GsySuc> list = controladorSucService.getAll();
+            List<GsySucDto> list = controladorSucService.getAll();
             jcSucursal.removeAllItems();
-            for (GsySuc s : list) {
+            for (GsySucDto s : list) {
                 jcSucursal.addItem(s);
             }
         } catch (Exception ex) {
@@ -492,11 +492,11 @@ public class FormVtoVta extends javax.swing.JPanel {
 
     private void actualizarDepositos() {
         jcDeposito.removeAllItems();
-        GsySuc suc = (GsySuc) jcSucursal.getSelectedItem();
+        GsySucDto suc = (GsySucDto) jcSucursal.getSelectedItem();
         try {
-            List<StkDepositos> list = controladorDepositosService.getAll();
+            List<StkDepositosDto> list = controladorDepositosService.getAll();
             jcDeposito.removeAllItems();
-            for (StkDepositos s : list) {
+            for (StkDepositosDto s : list) {
                 if (s.getSucId().getSucId().equals(suc.getSucId())) {
                     jcDeposito.addItem(s);
                 }
@@ -507,10 +507,10 @@ public class FormVtoVta extends javax.swing.JPanel {
         }
     }
 
-    public GsyTalonarios getFromForm() {
+    public GsyTalonariosDto getFromForm() {
         wcurrentRecord.setTrPuerto((Puertos) jcPuertos.getSelectedItem());
 
-        StkDepositos dep = (StkDepositos) jcDeposito.getSelectedItem();
+        StkDepositosDto dep = (StkDepositosDto) jcDeposito.getSelectedItem();
         currentRecord.setDepoId(dep);
 
         currentRecord.setDes(jtDescripcion.getText());

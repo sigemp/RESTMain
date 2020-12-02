@@ -8,7 +8,7 @@ package com.sigemp.gestion.client.online.wrapper;
 import com.sigemp.gestion.constants.ComportamientoEmisionComprobante;
 import com.sigemp.gestion.constants.Sistema;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
-import com.sigemp.gestion.shared.entity.GsyContadores;
+import com.sigemp.gestion.shared.dto.GsyContadoresDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +25,13 @@ public class WrapperContador {
     private Sistema trSistema;
     private ComportamientoEmisionComprobante trComportamientoEnEmisionComprobante;
 
-    public static WrapperContador instance(GsyContadores current) {
+    public static WrapperContador instance(GsyContadoresDto current) {
 
         return new WrapperContador(current);
     }
-    private final GsyContadores gsyContador;
+    private final GsyContadoresDto gsyContador;
 
-    private WrapperContador(GsyContadores current) {
+    private WrapperContador(GsyContadoresDto current) {
         this.gsyContador = current;
     }
 

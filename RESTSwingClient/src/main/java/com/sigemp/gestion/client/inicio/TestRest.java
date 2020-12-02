@@ -5,10 +5,10 @@
  */
 package com.sigemp.gestion.client.inicio;
 
-import com.sigemp.gestion.shared.entity.GsyProv;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
 import com.sigemp.gestion.client.services.GsyProvService;
 import com.sigemp.gestion.client.services.GsyTalonariosService;
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import java.util.ArrayList;
 
 //import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
@@ -27,35 +27,31 @@ public class TestRest {
 
         try {
 
-            
-           
-            HttpAuthenticationFeature authentication = HttpAuthenticationFeature.basic("ccc","cc");
-            
-            
+            HttpAuthenticationFeature authentication = HttpAuthenticationFeature.basic("ccc", "cc");
+
             // busco cuentas que existen y las borro
-            List<GsyProv> listCu = customerService.getList(null,0,100).getList();
+            List<GsyProvDto> listCu = customerService.getList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
 
-            for (GsyProv c : listCu) {
+            for (GsyProvDto c : listCu) {
                 //customerService.remove(c.getProvId());
             }
 
             // Creo cuentas
-            List<GsyProv> lisToCreate = getCuentas();
+            List<GsyProvDto> lisToCreate = getCuentas();
 
-            for (GsyProv c : lisToCreate) {
+            for (GsyProvDto c : lisToCreate) {
                 customerService.create(c);
             }
-            
 
             // Listo las cuentas que cree
-            listCu = customerService.getList(null,0,100).getList();
+            listCu = customerService.getList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
 
             // cambio los atributos de una cuenta
-            GsyProv cu = customerService.find(1);
+            GsyProvDto cu = customerService.find(1);
             if (cu != null) {
                 System.out.println(cu);
                 cu.setDes("Rita Paola");
@@ -63,14 +59,11 @@ public class TestRest {
             }
 
             // Listo con la modificacion del nombre
-            listCu = customerService.getList(null,0,100).getList();
+            listCu = customerService.getList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
-            
-            
-            
-            GsyTalonarios s = talonariosService.findDtoById(5);
-            
+
+            GsyTalonariosDto s = talonariosService.findDtoById(5);
 
         } catch (Exception ex) {
             Logger.getLogger(TestRest.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +71,7 @@ public class TestRest {
 
     }
 
-    public static List<GsyProv> getCuentas() {
+    public static List<GsyProvDto> getCuentas() {
 ////        List<GsyProv> listGsyProv = new ArrayList<>();
 ////
 ////        GsyProv customer1 = new GsyProv();

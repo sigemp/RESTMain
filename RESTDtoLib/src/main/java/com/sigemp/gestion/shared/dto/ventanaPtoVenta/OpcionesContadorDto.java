@@ -17,6 +17,10 @@ public class OpcionesContadorDto {
     private List<FormatoComprobanteDto> formatoVistaPrevia;
     private List<Integer> comprobantes;
 
+    public OpcionesContadorDto() {
+
+    }
+
     /**
      * @return the formatoImpresion
      */

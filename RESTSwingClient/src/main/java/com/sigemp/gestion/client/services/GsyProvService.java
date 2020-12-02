@@ -6,7 +6,7 @@
 package com.sigemp.gestion.client.services;
 
 import com.sigemp.client.dto.PageableWrapper;
-import com.sigemp.gestion.shared.entity.GsyProv;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
 import java.util.HashMap;
 import java.util.List;
 import javax.ws.rs.ProcessingException;
@@ -24,7 +24,7 @@ public class GsyProvService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_PROVINCIA.getParam());
 
-    public void create(GsyProv entity) throws Exception {
+    public void create(GsyProvDto entity) throws Exception {
         try {
             Response res = target
                     .request()
@@ -57,11 +57,11 @@ public class GsyProvService extends RESTService {
         }
     }
 
-    public GsyProv getNew() throws Exception {
+    public GsyProvDto getNew() throws Exception {
         try {
-            GsyProv res = target
+            GsyProvDto res = target
                     .path("newentity")
-                    .request().get(GsyProv.class);
+                    .request().get(GsyProvDto.class);
 
             return res;
         } catch (Exception ex) {
@@ -69,7 +69,7 @@ public class GsyProvService extends RESTService {
         }
     }
     
-       public void edit(GsyProv entity) throws Exception {
+       public void edit(GsyProvDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getProvId().toString()) // el id del registro a editar
@@ -86,7 +86,7 @@ public class GsyProvService extends RESTService {
 
     }
 
-    public PageableWrapper<GsyProv> getList(HashMap<String, Object> map, long start, long size) throws Exception {
+    public PageableWrapper<GsyProvDto> getList(HashMap<String, Object> map, long start, long size) throws Exception {
         if (map == null) {
             map = new HashMap<>();
         }
@@ -111,10 +111,10 @@ public class GsyProvService extends RESTService {
             int cnt = getIntFromString(res.getHeaderString("query_count"));
 
             // saco informacion de pageable del header
-            PageableWrapper<GsyProv> dto = getPageableCount(cnt);
+            PageableWrapper<GsyProvDto> dto = getPageableCount(cnt);
 
             // Obtengo la lista de la respuesta
-            List<GsyProv> listCu = (List<GsyProv>) res.readEntity(new GenericType<List<GsyProv>>() {
+            List<GsyProvDto> listCu = (List<GsyProvDto>) res.readEntity(new GenericType<List<GsyProvDto>>() {
             });
 
             dto.setList(listCu);
@@ -128,13 +128,13 @@ public class GsyProvService extends RESTService {
 
     }
 
-    public GsyProv find(long id) throws Exception {
+    public GsyProvDto find(long id) throws Exception {
         try {
-            GsyProv cu = target
+            GsyProvDto cu = target
                     .path(String.valueOf(id))
                     .request()
                     //                    .accept(MediaType.APPLICATION_XML)
-                    .get(GsyProv.class);
+                    .get(GsyProvDto.class);
             return cu;
         } catch (Exception ex) {
             throw new Exception(ex);

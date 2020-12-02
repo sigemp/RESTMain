@@ -13,15 +13,20 @@ package com.sigemp.gestion.client.gui.sis_config.form;
 import com.sigemp.gestion.client.gui.component.base.Toast;
 import com.sigemp.common.SwingUtils;
 import com.sigemp.common.exception.SgException;
+import com.sigemp.gestion.client.gui.component.SgImage;
+import com.sigemp.gestion.client.gui.component.base.CRUD;
+import com.sigemp.gestion.client.gui.component.base.SgForm;
 import com.sigemp.gestion.constants.Comprobante;
 import com.sigemp.gestion.client.online.wrapper.WrapperContador;
+import com.sigemp.gestion.client.services.GsyContadoresService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.gestion.client.services.ventanaPtoVenta.PtoVtaService;
 import com.sigemp.gestion.constants.ComportamientoEmisionComprobante;
 import com.sigemp.gestion.constants.Sistema;
 import com.sigemp.gestion.constants.TipoSalida;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.FormatoComprobanteDto;
-import com.sigemp.gestion.shared.entity.GsyContadores;
+import com.sigemp.gestion.shared.dto.GsyContadoresDto;
+import com.sigemp.gestion.shared.dto.ventanaPtoVenta.OpcionesContadorDto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -37,14 +42,14 @@ import javax.swing.tree.DefaultTreeModel;
  *
  * @author CRISTIANE
  */
-public class FormContadores extends javax.swing.JPanel {
+public class FormContadores extends SgForm {
 
     private final DefaultListModel<Comprobante> model;
     //private final GsyContadoresTipoService controladorContadorTipo = ServiceFactory.getGsyContadoresTipo();
-    //private final GsyContadoresService controladorService = ServiceFactory.getGsyContador();
+    private final GsyContadoresService gsyContadorService = ServiceFactory.getGsyContador();
     private final PtoVtaService ptovtaService = ServiceFactory.getPtoVtaService();
 
-    protected GsyContadores currentRecord;
+    protected GsyContadoresDto currentRecord;
     private DefaultMutableTreeNode dmtn;
     private DefaultTreeModel modelo;
     private WrapperContador wcurrentRecord;
@@ -54,8 +59,8 @@ public class FormContadores extends javax.swing.JPanel {
      *
      * @return the value of currentRecord
      */
-    public GsyContadores getFromForm() {
-        GsyContadores contador = new GsyContadores();
+    public GsyContadoresDto getFromForm() {
+        GsyContadoresDto contador = new GsyContadoresDto();
         contador.setConId(SwingUtils.getInt(jFormattedTextField1));
         contador.setEstado(jCheckBox1.isSelected());
         contador.setDes(jTextField2.getText());
@@ -74,8 +79,9 @@ public class FormContadores extends javax.swing.JPanel {
      * talonario
      *
      * @param currentRecord new value of currentRecord
+     * @param crud
      */
-    public void setCurrentRecord(GsyContadores currentRecord) {
+    public void setCurrentRecord(GsyContadoresDto currentRecord, CRUD crud) {
         this.currentRecord = currentRecord;
         this.wcurrentRecord = WrapperContador.instance(currentRecord);
 
@@ -106,13 +112,17 @@ public class FormContadores extends javax.swing.JPanel {
         if (formatoImpresionId != null) {
             jcb_FormatoImpresion.setSelectedItem(formatoImpresionId);
         } else {
-            jcb_FormatoImpresion.setSelectedIndex(0);
+            if (jcb_FormatoImpresion.getModel().getSize() != 0) {
+                jcb_FormatoImpresion.setSelectedIndex(0);
+            }
         }
 
         if (formatoVistaPreviaId != null) {
             jcb_FormatoVistaPrevia.setSelectedItem(formatoVistaPreviaId);
         } else {
-            jcb_FormatoVistaPrevia.setSelectedIndex(0);
+            if (jcb_FormatoVistaPrevia.getModel().getSize() != 0) {
+                jcb_FormatoVistaPrevia.setSelectedIndex(0);
+            }
         }
 
         ComportamientoEmisionComprobante coomp = wcurrentRecord.getTrCompEmisionComprobante();
@@ -123,15 +133,23 @@ public class FormContadores extends javax.swing.JPanel {
             jcb_ComportamientoEmisionComprobante.setSelectedIndex(0);
         }
 
-        
-        List<Integer> listComprobantes = ptovtaService.getComprobantesByContador(currentRecord.getTipoContador());
-        
-        // Agrego los comprobantes que estan asignados a este contador
         model.removeAllElements();
-        for (Integer tc : listComprobantes) {
+        for (Integer tc : currentRecord.getComprobantes()) {
             Comprobante.getById(tc);
             model.addElement(Comprobante.getById(tc));
         }
+//        model.removeAllElements();
+//        List<Integer> listComprobantes;
+//        try {
+//            listComprobantes = ptovtaService.getComprobantesByContador(currentRecord.getConId());
+//            // Agrego los comprobantes que estan asignados a este contador
+//            for (Integer tc : listComprobantes) {
+//                Comprobante.getById(tc);
+//                model.addElement(Comprobante.getById(tc));
+//            }
+//        } catch (SgException ex) {
+//            Logger.getLogger(FormContadores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         actualizarEstadoCheckBox();
 
@@ -145,6 +163,8 @@ public class FormContadores extends javax.swing.JPanel {
         SwingUtils.setMaskCantidadDecimal(jFormattedTextField1, 0);
         SwingUtils.setSelectText(jFormattedTextField1);
         SwingUtils.setSelectText(jTextField2);
+
+        jb_guardar.setIcon(SgImage.ACEPTAR.getImage(SgImage.SIZES.S16));
 
         ActionListener actualzaListener = (ActionEvent actionEvent) -> {
             actualizarEstadoCheckBox();
@@ -205,20 +225,22 @@ public class FormContadores extends javax.swing.JPanel {
     private void cargarFormatosEnComboBox() {
         Sistema sistema = (Sistema) jcb_tiposContador.getSelectedItem();
 
-        /// Consultar Formatos disponibles para el Sistem (Tipo Comprobante)
-//        List<FormatoComprobanteDto> list = AbstractComprobante.getListaFormatosComprobantes(sistema);
-//        
-//        jcb_FormatoVistaPrevia.removeAllItems();
-//        for (FormatoComprobanteDto o : list) {
-//            if (o.getTipoSalida() == TipoSalida.GRAFICA) {
-//                jcb_FormatoVistaPrevia.addItem(o);
-//            }
-//        }
-//
-//        jcb_FormatoImpresion.removeAllItems();
-//        for (AbstractComprobante o : list) {
-//            jcb_FormatoImpresion.addItem(o);
-//        }
+        try {
+            OpcionesContadorDto opciones = ptovtaService.getOpcionesVtaDtos(sistema.name());
+
+            jcb_FormatoImpresion.removeAllItems();
+            jcb_FormatoVistaPrevia.removeAllItems();
+            
+            for (FormatoComprobanteDto o : opciones.getFormatoVistaPrevia()) {
+                jcb_FormatoVistaPrevia.addItem(o);
+            }
+            for (FormatoComprobanteDto o : opciones.getFormatoImpresion()) {
+                jcb_FormatoImpresion.addItem(o);
+            }
+            
+       } catch (SgException ex) {
+            Logger.getLogger(FormContadores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void chequearDatosIngresados() throws SgException {
@@ -289,7 +311,7 @@ public class FormContadores extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jcb_tiposContador = new javax.swing.JComboBox<>();
-        jbAceptar = new javax.swing.JButton();
+        jb_guardar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jcb_FormatoImpresion = new javax.swing.JComboBox<>();
@@ -365,11 +387,10 @@ public class FormContadores extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sigemp/client/png/p20x20/guardar.png"))); // NOI18N
-        jbAceptar.setText("Guardar");
-        jbAceptar.addActionListener(new java.awt.event.ActionListener() {
+        jb_guardar.setText("Guardar");
+        jb_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAceptarActionPerformed(evt);
+                jb_guardarActionPerformed(evt);
             }
         });
 
@@ -489,7 +510,6 @@ public class FormContadores extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sigemp/client/png/p20x20/agregar.png"))); // NOI18N
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,7 +517,6 @@ public class FormContadores extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sigemp/client/png/p20x20/eliminar-item.png"))); // NOI18N
         jButton2.setText("Quitar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,7 +538,7 @@ public class FormContadores extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jb_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -531,7 +550,7 @@ public class FormContadores extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -549,9 +568,9 @@ public class FormContadores extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
+    private void jb_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_guardarActionPerformed
         guardarDatos();
-    }//GEN-LAST:event_jbAceptarActionPerformed
+    }//GEN-LAST:event_jb_guardarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         agregarTipoComprobante();
@@ -586,7 +605,7 @@ public class FormContadores extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton jbAceptar;
+    private javax.swing.JButton jb_guardar;
     private javax.swing.JComboBox<ComportamientoEmisionComprobante> jcb_ComportamientoEmisionComprobante;
     private javax.swing.JComboBox<FormatoComprobanteDto> jcb_FormatoImpresion;
     private javax.swing.JComboBox<FormatoComprobanteDto> jcb_FormatoVistaPrevia;
@@ -616,7 +635,7 @@ public class FormContadores extends javax.swing.JPanel {
 
         try {
 
-            GsyContadores tmpContador = getFromForm();
+            GsyContadoresDto tmpContador = getFromForm();
 
             chequearDatosIngresados();
 
@@ -644,7 +663,7 @@ public class FormContadores extends javax.swing.JPanel {
             Toast.show("Datos del Contador Guardado");
         } catch (SgException ex) {
             LOG.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            me("Error", ex);
         }
     }
 
@@ -655,5 +674,19 @@ public class FormContadores extends javax.swing.JPanel {
             return;
         }
         model.removeElementAt(x);
+    }
+
+    public void setId(Integer id) {
+        try {
+            if (id == null) {
+                setCurrentRecord(new GsyContadoresDto(), CRUD.ALTA);
+            } else {
+                GsyContadoresDto record = gsyContadorService.find(id);
+                setCurrentRecord(record, CRUD.MODIFICACION);
+            }
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            me("Error", ex);
+        }
     }
 }

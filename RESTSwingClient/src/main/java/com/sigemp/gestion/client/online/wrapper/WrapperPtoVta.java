@@ -10,7 +10,7 @@ import com.sigemp.afip.ifis.ConstantesFiscales.Marcas;
 import com.sigemp.afip.ifis.ConstantesFiscales.Modelos;
 import com.sigemp.afip.ifis.ConstantesFiscales.Puertos;
 import com.sigemp.common.StringUtils;
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import static com.sigemp.common.StringUtils.RC;
 
 /**
@@ -19,17 +19,17 @@ import static com.sigemp.common.StringUtils.RC;
  */
 public class WrapperPtoVta {
 
-    private final GsyTalonarios current;
+    private final GsyTalonariosDto current;
     private Marcas trMarca;
     private Puertos trPuerto;
     private Modelos trModelo;
     private Baudios trBaudios;
 
-    public WrapperPtoVta(GsyTalonarios current) {
+    public WrapperPtoVta(GsyTalonariosDto current) {
         this.current = current;
     }
 
-    public static WrapperPtoVta instance(GsyTalonarios current) {
+    public static WrapperPtoVta instance(GsyTalonariosDto current) {
 
         return new WrapperPtoVta(current);
     }

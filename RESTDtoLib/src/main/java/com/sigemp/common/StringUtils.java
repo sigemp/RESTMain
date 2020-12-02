@@ -7,6 +7,7 @@ package com.sigemp.common;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -163,6 +164,20 @@ public class StringUtils {
         } else {
             return fillIzquierda(str, longitud);
         }
+    }
+
+    public static List<Integer> getArrayInt(String str) {
+        str = str.replaceAll("[(*)]", "$1");
+        String x = str.replaceAll("[\\[\\]]", ""); // The regex you need to find "[\[\]], 
+        // because you want to remove any square
+        // brackets
+        String[] y = x.split(","); // Simply put the separator (a comma in this case)
+
+        ArrayList<Integer> z = new ArrayList<>();
+        for (int i = 0; i < y.length; i++) {
+            z.add(Integer.valueOf(y[i].trim()));
+        }
+        return z;
     }
 
     /**

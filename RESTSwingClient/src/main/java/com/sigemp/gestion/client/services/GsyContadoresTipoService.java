@@ -5,7 +5,7 @@
  */
 package com.sigemp.gestion.client.services;
 
-import com.sigemp.gestion.shared.entity.GsyContadorestipos;
+import com.sigemp.gestion.shared.dto.GsyContadorestiposDto;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.sigemp.gestion.shared.entity.GsyContadorestipos;
  */
 public class GsyContadoresTipoService {
 
-    public void delete(GsyContadorestipos con) {
+    public void delete(GsyContadorestiposDto con) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

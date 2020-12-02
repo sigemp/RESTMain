@@ -24,6 +24,7 @@ public class PrintOut implements ClientRequestFilter, ClientResponseFilter {
         System.out.println(requestContext.toString());
         System.out.println("-- Client request info --");
         log(requestContext.getUri(), requestContext.getHeaders());
+        
     }
 
     @Override

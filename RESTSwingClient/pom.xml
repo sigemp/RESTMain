@@ -43,25 +43,16 @@
             <artifactId>jersey-hk2</artifactId>
             <version>2.27</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-            <version>2.7.1</version>
-            <type>jar</type>
-        </dependency>
+      
     
         <!-- Jackson Dependencias-->
  
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-moxy</artifactId>
+            <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.24</version>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
-            <artifactId>jersey-guava</artifactId>
-            <version>2.25</version>
-        </dependency>
+       
         
         <dependency>
             <groupId>junit</groupId>
@@ -78,12 +69,7 @@
             <version>1.13</version>
         </dependency>
 
-        
-        <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.14.2.0</version>
-        </dependency>
+     
         
         <dependency>
             <groupId>com.toedter</groupId>

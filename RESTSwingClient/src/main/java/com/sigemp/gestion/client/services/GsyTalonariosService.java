@@ -6,8 +6,8 @@
 package com.sigemp.gestion.client.services;
 
 import com.sigemp.common.exception.SgException;
-import com.sigemp.gestion.shared.entity.GsyProv;
-import com.sigemp.gestion.shared.entity.GsyTalonarios;
+import com.sigemp.gestion.shared.dto.GsyProvDto;
+import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.client.WebTarget;
@@ -21,24 +21,24 @@ public class GsyTalonariosService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_TALONARIO.getParam());
 
-    public GsyTalonarios findDtoById(Integer id) throws SgException {
+    public GsyTalonariosDto findDtoById(Integer id) throws SgException {
         try {
-            GsyTalonarios cu = target
+            GsyTalonariosDto cu = target
                     .path(String.valueOf(id))
                     .request()
                     //.accept(MediaType.APPLICATION_XML)
-                    .get(GsyTalonarios.class);
+                    .get(GsyTalonariosDto.class);
             return cu;
         } catch (Exception ex) {
             throw new SgException("Error", ex);
         }
     }
 
-    public List<GsyTalonarios> getDtoList() throws SgException {
-        return new ArrayList<GsyTalonarios>();
+    public List<GsyTalonariosDto> getDtoList() throws SgException {
+        return new ArrayList<GsyTalonariosDto>();
     }
 
-    public GsyTalonarios getDtoNew() throws SgException {
+    public GsyTalonariosDto getDtoNew() throws SgException {
         return null;
     }
 
