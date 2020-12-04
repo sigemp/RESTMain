@@ -10,9 +10,7 @@ package com.sigemp.gestion.client.gui.sis_config.form;
  *
  * Created on 12/06/2009, 11:47:15
  */
-
-
-
+import com.sigemp.gestion.client.gui.component.SgImage;
 import com.sigemp.gestion.client.gui.component.base.SgDialog;
 import com.sigemp.gestion.constants.Comprobante;
 import com.sigemp.gestion.constants.Sistema;
@@ -32,7 +30,9 @@ public class DialogSeleccionComprobantes extends SgDialog {
     private static final Logger LOG = Logger.getLogger(DialogSeleccionComprobantes.class.getName());
 
     protected boolean confirmed = false;
-    private final DefaultListModel<Comprobante> model = new DefaultListModel<>();;
+    private final DefaultListModel<Comprobante> model = new DefaultListModel<>();
+
+    ;
 
     /**
      * Get the value of confirmed
@@ -54,21 +54,23 @@ public class DialogSeleccionComprobantes extends SgDialog {
 
     /**
      * Creates new form Beneficiarios
+     *
      * @param parent
      * @param modal
      */
-  public DialogSeleccionComprobantes(JDialog parent, boolean modal) {
+    public DialogSeleccionComprobantes(JDialog parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
 
-        //setSize(415, 350);
+        jb_aceptar.setIcon(SgImage.ACEPTAR.getImage(SgImage.SIZES.S16));
+        jb_cancelar.setIcon(SgImage.CANCELAR.getImage(SgImage.SIZES.S16));
         
+        setSize(415, 350);
         jList1.setModel(model);
         jList1.setCellRenderer(new ListadosRender());
 
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,7 +97,6 @@ public class DialogSeleccionComprobantes extends SgDialog {
         jScrollPane1.setViewportView(jList1);
 
         jb_aceptar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jb_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sigemp/client/png/p20x20/ok.png"))); // NOI18N
         jb_aceptar.setText("Aceptar");
         jb_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +105,6 @@ public class DialogSeleccionComprobantes extends SgDialog {
         });
 
         jb_cancelar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sigemp/client/png/p20x20/cancel.png"))); // NOI18N
         jb_cancelar.setText("Cancelar");
         jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,16 +174,15 @@ public class DialogSeleccionComprobantes extends SgDialog {
         return ls;
     }
 
-    public void setTCTC(Sistema sistema, List<Comprobante> filtroTc) {
+    public void setTCTC(List<Comprobante> comprobantesSeleccionados, List<Comprobante> disponibles) {
 
-        for (Comprobante tc : Comprobante.values()) {
+        for (Comprobante tc : disponibles) {
             // Si tipo de comprobante tc esta en los que ya se encuentra, no lo muestro como opcion 
-            if (filtroTc.contains(tc)) {
+            if (comprobantesSeleccionados.contains(tc)) {
                 continue;
             }
-            if (tc.getTipoComprobante().getSistema().equals(sistema)) {
-                model.addElement(tc);
-            }
+            model.addElement(tc);
         }
     }
+
 }

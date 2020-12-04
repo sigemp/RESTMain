@@ -22,11 +22,13 @@ public abstract class SgDialog extends JDialog {
     public SgDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         addEscClose();
+        preInit();
     }
 
     public SgDialog(JDialog parent, boolean modal) {
         super(parent, modal);
         addEscClose();
+        preInit();
     }
 
     public void me(Exception ex) {
@@ -41,5 +43,10 @@ public abstract class SgDialog extends JDialog {
         getRootPane().registerKeyboardAction(escListener,
                 KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
                 JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+    }
+
+    public void preInit() {
+
     }
 }

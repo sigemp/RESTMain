@@ -5,6 +5,8 @@
  */
 package com.sigemp.gestion.constants;
 
+import java.util.Arrays;
+
 public enum Sistema {
     GENERAL("General", 0),
     VENTA("Ventas", 1),
@@ -60,4 +62,13 @@ public enum Sistema {
     public String toString() {
         return descripcion;
     }
+
+    public static String getNames() {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(values()).forEach(e -> {
+            sb.append(e.name()).append(",");
+        });
+        return sb.toString();
+    }
+
 }

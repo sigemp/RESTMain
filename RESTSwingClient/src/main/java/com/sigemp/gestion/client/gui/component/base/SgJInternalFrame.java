@@ -25,29 +25,39 @@ public class SgJInternalFrame extends JInternalFrame {
         setClosable(true);
         setFrameIcon(sgImage.getImage(SgImage.SIZES.S20));
     }
-    
+
     public void me(Exception ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage());
     }
-    
+
     public void setIcon(SgImage sgImage) {
         setFrameIcon(sgImage.getImage(SgImage.SIZES.S20));
         this.sgImage = sgImage;
     }
-    
+
     public SgImage getIcon() {
         return sgImage;
     }
-    
+
+    /**
+     * Retorna el panel Principal se usa para abrir un Dialog
+     *
+     * @return
+     */
+    public JFrame getMainParent() {
+        JFrame frame = (JFrame) getDesktopPane().getTopLevelAncestor();
+        return frame;
+    }
+
     /**
      * Es ejecutado despues de crear el Objeto
-     * 
+     *
      */
     public void init() {
-        
+
     }
-    
+
     public void postInit() {
-        
+
     }
 }

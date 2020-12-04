@@ -73,16 +73,15 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
 
         try {
 
-            JFrame frame = (JFrame) getDesktopPane().getTopLevelAncestor();
-            FormGsyProv abm = new FormGsyProv(frame, false);
+            FormGsyProv abm = new FormGsyProv(getMainParent(), false);
             switch (cur) {
                 case ALTA: {
-                    GsyProvDto entity = service.getNew();
-                    abm.setRecord(entity, cur);
+                    abm.setId(0, cur);
                     abm.setVisible(true);
                     if (abm.isConfirmed()) {
                         GsyProvDto cusadd = abm.getRecord();
-                        service.create(cusadd);
+                        int id = service.restCreate(cusadd);
+                        cusadd = service.restFind(id);
                         dm.addRow(cusadd);
                     }
                     break;
@@ -91,18 +90,19 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
                     int x = JOptionPane.showConfirmDialog(this, "Elimina?", "Eliminar Registro", JOptionPane.YES_NO_OPTION);
                     if (x == JOptionPane.YES_OPTION) {
                         GsyProvDto entity = getCurrentRecortd();
-                        service.remove(entity.getProvId());
+                        service.restRemove(entity.getProvId());
                         dm.removeRow(entity);
                     }
                     break;
                 }
                 case MODIFICACION: {
                     GsyProvDto entity = getCurrentRecortd();
-                    abm.setRecord(entity, cur);
+                    abm.setId(entity.getProvId(), cur);
                     abm.setVisible(true);
                     if (abm.isConfirmed()) {
                         GsyProvDto cusadd = abm.getRecord();
-                        service.edit(cusadd);
+                        service.restEdit(cusadd);
+                        cusadd = service.restFind(entity.getProvId());
                         dm.refresh(entity, cusadd);
                     }
                     break;
@@ -126,7 +126,7 @@ public class WABMGsyProv extends SgJInternalFrame implements PageableInterface {
                 map.put("des", des);
             }
 
-            PageableWrapper<GsyProvDto> pag = service.getList(map, pageableButton.getCurrentFirstRecord(), pageableButton.getSizeQuery());
+            PageableWrapper<GsyProvDto> pag = service.restList(map, pageableButton.getCurrentFirstRecord(), pageableButton.getSizeQuery());
 
             List<GsyProvDto> list = pag.getList();
 

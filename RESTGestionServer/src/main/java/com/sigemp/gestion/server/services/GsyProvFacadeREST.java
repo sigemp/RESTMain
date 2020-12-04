@@ -95,7 +95,7 @@ public class GsyProvFacadeREST extends AbstractFacade<GsyProv> {
      */
     @GET
     @Path("newentity")
-    public GsyProv newEntity() {
+    public GsyProv restNewEntity() {
         GsyProv prov = new GsyProv();
         prov.setProvId(0);
         prov.setDes("default");
@@ -311,17 +311,7 @@ public class GsyProvFacadeREST extends AbstractFacade<GsyProv> {
         return String.valueOf(super.count());
     }
 
-    private String getPageableString(PageableDto dto) {
-        String str = "";
-        //Write JSON from java objects
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            str = mapper.writeValueAsString(dto);
-        } catch (JsonProcessingException ex) {
-            LOG.severe(ex.getMessage());
-        }
-        return str;
-    }
+    
 
     @Override
     protected EntityManager getEntityManager() {

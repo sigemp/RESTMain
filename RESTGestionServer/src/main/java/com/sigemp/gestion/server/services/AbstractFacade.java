@@ -5,11 +5,16 @@
  */
 package com.sigemp.gestion.server.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sigemp.common.exception.SgStatusDto;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -20,6 +25,9 @@ public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
 
+    private static final Logger LOG = Logger.getLogger(AbstractFacade.class.getName());
+    
+    
     @Context
     HttpServletRequest httpRequest;
 
@@ -96,7 +104,7 @@ public abstract class AbstractFacade<T> {
     /**
      * Analizo el request
      */
-    protected static void extractHeaders(HttpServletRequest httpRequest) {
+    public static void extractHeaders(HttpServletRequest httpRequest) {
 
         Enumeration<String> headerNames = httpRequest.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -105,6 +113,30 @@ public abstract class AbstractFacade<T> {
         }
         System.out.println("--------------------------");
 
+    }
+    
+    public String getPageableString(PageableDto dto) {
+        String str = "";
+        //Write JSON from java objects
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            str = mapper.writeValueAsString(dto);
+        } catch (JsonProcessingException ex) {
+            LOG.severe(ex.getMessage());
+        }
+        return str;
+    }
+    
+     public Response responseNotFound(Response.Status status, String msg) {
+        Response.Status res = Response.Status.NOT_FOUND;
+        SgStatusDto statusDto = new SgStatusDto("error", res.getStatusCode(), msg);
+        return Response.status(res).entity(statusDto).build();
+    }
+
+    public Response responseError(Response.Status status, String msg) {
+        Response.Status res = Response.Status.BAD_REQUEST;
+        SgStatusDto statusDto = new SgStatusDto("error", res.getStatusCode(), msg);
+        return Response.status(res).entity(statusDto).build();
     }
 
 }

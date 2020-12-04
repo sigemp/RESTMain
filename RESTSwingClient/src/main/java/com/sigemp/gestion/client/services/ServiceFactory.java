@@ -17,12 +17,12 @@ public class ServiceFactory {
         return new GsyContadoresService();
     }
 
-    public static GsyContadoresTipoService getGsyContadoresTipo() {
-        return new GsyContadoresTipoService();
-    }
-
-    public static GsyTalonariosService getGsyTalonarios() {
-        return new GsyTalonariosService();
+//    public static GsyContadoresTipoService getGsyContadoresTipo() {
+//        return new GsyContadoresTipoService();
+//    }
+//
+    public static GsyTalonarioService getGsyTalonarios() {
+        return new GsyTalonarioService();
     }
 
     public static GsySucService getGsySuc() {
@@ -33,16 +33,16 @@ public class ServiceFactory {
         return new PtoVtaService();
     }
 
-    public static GsyTalonarioService getGsyTalonario() {
-        return new GsyTalonarioService();
-    }
-
     public static GsySucService getGsySucService() {
         return new GsySucService();
     }
 
     public static StkDepositoService getStkDepositoService() {
         return new StkDepositoService();
+    }
+
+    public static GsyCertificadoService getGsyCertificadosService() {
+        return new GsyCertificadoService();
     }
     
     

@@ -7,7 +7,6 @@ package com.sigemp.gestion.client.inicio;
 
 import com.sigemp.gestion.shared.dto.GsyProvDto;
 import com.sigemp.gestion.client.services.GsyProvService;
-import com.sigemp.gestion.client.services.GsyTalonariosService;
 import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import java.util.ArrayList;
 
@@ -23,14 +22,13 @@ public class TestRest {
     public static void main(String[] args) {
 
         GsyProvService customerService = new GsyProvService();
-        GsyTalonariosService talonariosService = new GsyTalonariosService();
 
         try {
 
             HttpAuthenticationFeature authentication = HttpAuthenticationFeature.basic("ccc", "cc");
 
             // busco cuentas que existen y las borro
-            List<GsyProvDto> listCu = customerService.getList(null, 0, 100).getList();
+            List<GsyProvDto> listCu = customerService.restList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
 
@@ -42,28 +40,27 @@ public class TestRest {
             List<GsyProvDto> lisToCreate = getCuentas();
 
             for (GsyProvDto c : lisToCreate) {
-                customerService.create(c);
+                customerService.restCreate(c);
             }
 
             // Listo las cuentas que cree
-            listCu = customerService.getList(null, 0, 100).getList();
+            listCu = customerService.restList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
 
             // cambio los atributos de una cuenta
-            GsyProvDto cu = customerService.find(1);
+            GsyProvDto cu = customerService.restFind(1);
             if (cu != null) {
                 System.out.println(cu);
                 cu.setDes("Rita Paola");
-                customerService.edit(cu);
+                customerService.restEdit(cu);
             }
 
             // Listo con la modificacion del nombre
-            listCu = customerService.getList(null, 0, 100).getList();
+            listCu = customerService.restList(null, 0, 100).getList();
 
             System.out.println(Arrays.asList(listCu).toString());
 
-            GsyTalonariosDto s = talonariosService.findDtoById(5);
 
         } catch (Exception ex) {
             Logger.getLogger(TestRest.class.getName()).log(Level.SEVERE, null, ex);

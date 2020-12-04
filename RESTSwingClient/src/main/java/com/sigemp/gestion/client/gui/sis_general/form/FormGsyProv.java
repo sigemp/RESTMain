@@ -8,6 +8,8 @@ package com.sigemp.gestion.client.gui.sis_general.form;
 import com.sigemp.gestion.client.gui.component.base.CRUD;
 import com.sigemp.gestion.client.gui.component.base.SgDialog;
 import com.sigemp.common.U;
+import com.sigemp.gestion.client.gui.component.SgImage;
+import com.sigemp.gestion.client.services.GsyProvService;
 import com.sigemp.gestion.shared.dto.GsyProvDto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +26,8 @@ public class FormGsyProv extends SgDialog {
     private CRUD crud;
     private GsyProvDto reccordGsyProv;
 
+    GsyProvService service = new GsyProvService();
+
     /**
      * Creates new form NewABMGsyProv
      *
@@ -32,12 +36,10 @@ public class FormGsyProv extends SgDialog {
      */
     public FormGsyProv(JDialog parent, boolean modal) {
         super(parent, modal);
-        initComponents();
     }
 
     public FormGsyProv(JFrame jframe, boolean modal) {
         super(jframe, modal);
-        initComponents();
     }
 
     private void chequear(GsyProvDto cus) throws Exception {
@@ -78,8 +80,8 @@ public class FormGsyProv extends SgDialog {
         jtDescripcion = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jb_aceptar = new javax.swing.JButton();
+        jb_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
@@ -92,17 +94,17 @@ public class FormGsyProv extends SgDialog {
 
         jLabel2.setText("Descripcion:");
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_aceptar.setText("Aceptar");
+        jb_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_aceptarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jb_cancelar.setText("Cancelar");
+        jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jb_cancelarActionPerformed(evt);
             }
         });
 
@@ -122,9 +124,9 @@ public class FormGsyProv extends SgDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(174, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jb_aceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jb_cancelar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,15 +142,15 @@ public class FormGsyProv extends SgDialog {
                     .addComponent(jLabel2))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jb_aceptar)
+                    .addComponent(jb_cancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
         try {
             GsyProvDto cus = getFromScreen();
             chequear(cus);
@@ -159,18 +161,18 @@ public class FormGsyProv extends SgDialog {
             Logger.getLogger(FormGsyProv.class.getName()).log(Level.SEVERE, null, ex);
             me(ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jb_aceptarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
         setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jb_cancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jb_aceptar;
+    private javax.swing.JButton jb_cancelar;
     private javax.swing.JTextField jtDescripcion;
     private javax.swing.JTextField jtId;
     // End of variables declaration//GEN-END:variables
@@ -199,11 +201,28 @@ public class FormGsyProv extends SgDialog {
         switch (crud) {
             case ALTA:
                 jtId.setText("0");
+                jtId.setEnabled(false);
+                break;
+            default:
+                jtId.setEnabled(true);
         }
     }
 
-    void preInit() {
+    public void preInit() {
+        initComponents();
+        jb_aceptar.setIcon(SgImage.ACEPTAR.getImage(SgImage.SIZES.S16));
+        jb_cancelar.setIcon(SgImage.CANCELAR.getImage(SgImage.SIZES.S16));
 
+    }
+
+    public void setId(Integer id, CRUD cur) throws Exception {
+        if (cur == CRUD.ALTA) {
+            GsyProvDto entity = service.restNewEntity();
+            setRecord(entity, cur);
+        } else {
+            GsyProvDto cer = service.restFind(id);
+            setRecord(cer, cur);
+        }
     }
 
 }

@@ -18,25 +18,28 @@ import javax.ws.rs.core.Response;
  */
 public class GsyContadoresService extends RESTService {
 
-     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_CONTADORES.getParam());
+    WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_CONTADORES.getParam());
 
-    public void create(GsyContadoresDto entity) throws Exception {
+    public Integer restCreate(GsyContadoresDto entity) throws Exception {
         try {
             Response res = target
                     .request()
                     .post(Entity.json(entity));
 
-            if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "creando :");
-                throw new Exception(str);
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+
+                analizeError(res);
             }
+            Integer id = res.readEntity(Integer.class);
+
+            return id;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
 
     }
 
-    public void remove(long id) throws Exception {
+    public void restRemove(long id) throws Exception {
 
         try {
             Response res = target
@@ -45,35 +48,40 @@ public class GsyContadoresService extends RESTService {
                     .delete();
 
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
 
-    public GsyContadoresDto getNew() throws Exception {
+    public GsyContadoresDto restNewEntity() throws Exception {
         try {
-            GsyContadoresDto res = target
+            Response res = target
                     .path("newentity")
-                    .request().get(GsyContadoresDto.class);
+                    .request()
+                    .get();
 
-            return res;
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyContadoresDto dto = res.readEntity(GsyContadoresDto.class);
+
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
 
-    public void edit(GsyContadoresDto entity) throws Exception {
+    public void restEdit(GsyContadoresDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getTalId().toString()) // el id del registro a editar
                     .request()
                     .put(Entity.json(entity));
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
@@ -81,13 +89,19 @@ public class GsyContadoresService extends RESTService {
 
     }
 
-    public GsyContadoresDto find(long id) throws Exception {
+    public GsyContadoresDto restFind(long id) throws Exception {
         try {
-            GsyContadoresDto cu = target
+            Response res = target
                     .path(String.valueOf(id))
                     .request()
-                    .get(GsyContadoresDto.class);
-            return cu;
+                    .get();
+
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyContadoresDto dto = res.readEntity(GsyContadoresDto.class);
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }

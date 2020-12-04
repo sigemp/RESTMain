@@ -8,6 +8,8 @@ package com.sigemp.gestion.server.services;
 import com.sigemp.gestion.shared.dto.GsyContadoresDto;
 import com.sigemp.gestion.shared.entity.GsyContadores;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -27,7 +30,11 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("/gsycontadores")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class GsyContadoresFacadeREST extends AbstractFacade<GsyContadores> {
+
+    private static final Logger LOG = Logger.getLogger(GsyContadoresFacadeREST.class.getName());
 
     @PersistenceContext(unitName = "CustomerService")
     private EntityManager em;
@@ -37,10 +44,25 @@ public class GsyContadoresFacadeREST extends AbstractFacade<GsyContadores> {
     }
 
     @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(GsyContadores entity) {
-        super.create(entity);
+    public Response restCreate(GsyContadoresDto dto) {
+        try {
+            if (dto == null) {
+                return responseError(Response.Status.BAD_REQUEST, "Dto es null");
+            }
+            GsyContadores entity = new Convert(em).toEntity(dto);
+            
+            //Agrego las relaciones
+            entity.setGsyContadorestiposCollection(gsyContadorestiposCollection);
+        //entity.setTalId(dto.getTalId());
+
+            
+            em.persist(entity);
+            em.flush();
+            return Response.ok().entity(entity.getConId()).build();
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            return responseError(Response.Status.BAD_REQUEST, ex.getMessage());
+        }
     }
 
     @PUT
@@ -61,7 +83,7 @@ public class GsyContadoresFacadeREST extends AbstractFacade<GsyContadores> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public GsyContadoresDto find(@PathParam("id") Integer id) {
         GsyContadores entity = super.find(id);
-        GsyContadoresDto dto = new Convert().toDto(entity);
+        GsyContadoresDto dto = new Convert(em).toDto(entity);
 
         return dto;
     }

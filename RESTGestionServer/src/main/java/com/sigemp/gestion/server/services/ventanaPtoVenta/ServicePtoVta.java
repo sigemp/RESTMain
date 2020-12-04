@@ -5,6 +5,7 @@
  */
 package com.sigemp.gestion.server.services.ventanaPtoVenta;
 
+import com.sigemp.common.exception.SgStatusDto;
 import com.sigemp.gestion.constants.Comprobante;
 import com.sigemp.gestion.constants.Sistema;
 import com.sigemp.gestion.constants.TipoSalida;
@@ -20,6 +21,7 @@ import com.sigemp.gestion.shared.entity.GsyContadorestipos;
 import com.sigemp.gestion.shared.entity.GsySuc;
 import com.sigemp.gestion.shared.entity.GsyTalonarios;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,8 +35,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  *
@@ -55,7 +59,7 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
 
     @GET
     @Path("sucursales")
-    public List<GsySucDto> findRange(@QueryParam("sucId") Integer sucId) {
+    public Response restFindRange() {
         CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(GsySuc.class));
         List<GsySuc> list = getEntityManager().createQuery(cq).getResultList();
@@ -73,10 +77,9 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
             listSucDto.add(lsucDto);
         }
 
-        ///GenericEntity<List<GsySucDto>> lista = new GenericEntity<List<GsySucDto>>(listSucDto) {        };
-        //return Response.ok(new GenericEntity(List<listSucDto>));
-        return listSucDto;
-
+        GenericEntity<List<GsySucDto>> lista = new GenericEntity<List<GsySucDto>>(listSucDto) {
+        };
+        return Response.ok(lista).build();
     }
 
     @GET
@@ -186,20 +189,22 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
 
     @GET
     @Path("opcionesContador")
-    public OpcionesContadorDto opconesContador(@QueryParam("tipoContador") String tipoContador) {
-        
+    public Response restOpconesContador(@QueryParam("tipoContador") String tipoContador) {
+
         if (tipoContador == null) {
-            throw new WebApplicationException("Requiere Argumento",Response.Status.BAD_REQUEST);
+            Status res = Response.Status.BAD_REQUEST;
+            SgStatusDto status = new SgStatusDto("error", res.getStatusCode(), "Requiere argumento");
+            return Response.status(res).entity(status).build();
         }
-        Sistema sistema;
+        Sistema sistema = null;
         try {
             sistema = Sistema.valueOf(tipoContador);
         } catch (IllegalArgumentException e) {
-            throw new WebApplicationException("Argumento Invalido",Response.Status.BAD_REQUEST);
+            Status res = Response.Status.BAD_REQUEST;
+            SgStatusDto status = new SgStatusDto("error", res.getStatusCode(), "Parametro invalido. Requere:" + Sistema.getNames());
+            return Response.status(res).entity(status).build();
         }
-        
-                
-        
+
         OpcionesContadorDto opcionesContador = new OpcionesContadorDto();
 
         // leo los comprobantes y los agrego 
@@ -222,7 +227,7 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
         }
 
         opcionesContador.setComprobantes(listComprobantes);
-        return opcionesContador;
+        return Response.ok().entity(opcionesContador).build();
     }
 
     @Override

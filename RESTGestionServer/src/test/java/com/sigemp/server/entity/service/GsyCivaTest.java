@@ -6,7 +6,7 @@
 package com.sigemp.server.entity.service;
 
 import com.sigemp.gestion.shared.entity.GsyCiva;
-import com.sigemp.gestion.server.services.GsyCivaFacadeREST;
+import com.sigemp.gestion.server.services.automatic.GsyCivaFacadeREST;
 import java.util.List;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;

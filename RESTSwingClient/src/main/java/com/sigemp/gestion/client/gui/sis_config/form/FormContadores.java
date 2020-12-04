@@ -53,6 +53,7 @@ public class FormContadores extends SgForm {
     private DefaultMutableTreeNode dmtn;
     private DefaultTreeModel modelo;
     private WrapperContador wcurrentRecord;
+    private List<Integer> comprobantesDisponibles = new ArrayList<>();
 
     /**
      * Get the value of currentRecord
@@ -135,7 +136,6 @@ public class FormContadores extends SgForm {
 
         model.removeAllElements();
         for (Integer tc : currentRecord.getComprobantes()) {
-            Comprobante.getById(tc);
             model.addElement(Comprobante.getById(tc));
         }
 //        model.removeAllElements();
@@ -200,8 +200,19 @@ public class FormContadores extends SgForm {
         DialogSeleccionComprobantes diag = new DialogSeleccionComprobantes(null, true);
 
         Sistema tiposContadores = (Sistema) jcb_tiposContador.getSelectedItem();
+        
+        List<Comprobante> disponibles = new ArrayList<>();
+        
+        // Agrego los comprobantes que estan disponibles
+        comprobantesDisponibles.stream().forEach(e -> {
+            Comprobante c = Comprobante.getById(e);
+            if (c != null) {
+                disponibles.add(c);
+            }
+        });
+        
 
-        diag.setTCTC(tiposContadores, listTcIngresados);
+        diag.setTCTC(listTcIngresados,disponibles);
         diag.setVisible(true);
         if (diag.isConfirmed()) {
             List<Comprobante> lisResultado = diag.getCurrentRecord();
@@ -228,6 +239,8 @@ public class FormContadores extends SgForm {
         try {
             OpcionesContadorDto opciones = ptovtaService.getOpcionesVtaDtos(sistema.name());
 
+            comprobantesDisponibles = opciones.getComprobantes();
+            
             jcb_FormatoImpresion.removeAllItems();
             jcb_FormatoVistaPrevia.removeAllItems();
             
@@ -237,6 +250,7 @@ public class FormContadores extends SgForm {
             for (FormatoComprobanteDto o : opciones.getFormatoImpresion()) {
                 jcb_FormatoImpresion.addItem(o);
             }
+            
             
        } catch (SgException ex) {
             Logger.getLogger(FormContadores.class.getName()).log(Level.SEVERE, null, ex);
@@ -283,6 +297,10 @@ public class FormContadores extends SgForm {
 
     }
 
+    /**
+    * List con los comprobantes q actualmente estan en el formulario
+     * @return 
+     */
     private List<Comprobante> getListTiposComprobantes() {
         List<Comprobante> listTcIngresados = new ArrayList<>();
 
@@ -681,7 +699,7 @@ public class FormContadores extends SgForm {
             if (id == null) {
                 setCurrentRecord(new GsyContadoresDto(), CRUD.ALTA);
             } else {
-                GsyContadoresDto record = gsyContadorService.find(id);
+                GsyContadoresDto record = gsyContadorService.restFind(id);
                 setCurrentRecord(record, CRUD.MODIFICACION);
             }
         } catch (Exception ex) {

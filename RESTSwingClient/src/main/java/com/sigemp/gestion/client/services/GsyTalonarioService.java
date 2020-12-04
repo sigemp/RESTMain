@@ -18,24 +18,26 @@ public class GsyTalonarioService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_TALONARIO.getParam());
 
-    public void create(GsyTalonariosDto entity) throws Exception {
+    public Integer restCreate(GsyTalonariosDto entity) throws Exception {
         try {
             Response res = target
                     .request()
                     .post(Entity.json(entity));
 
-            if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "creando :");
-                throw new Exception(str);
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+
+                analizeError(res);
             }
+            Integer id = res.readEntity(Integer.class);
+
+            return id;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
 
     }
 
-    public void remove(long id) throws Exception {
-
+    public void restRemove(long id) throws Exception {
         try {
             Response res = target
                     .path(String.valueOf(id))
@@ -43,35 +45,40 @@ public class GsyTalonarioService extends RESTService {
                     .delete();
 
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
 
-    public GsyTalonariosDto getNew() throws Exception {
+    public GsyTalonariosDto restNewEntity() throws Exception {
         try {
-            GsyTalonariosDto res = target
+            Response res = target
                     .path("newentity")
-                    .request().get(GsyTalonariosDto.class);
+                    .request()
+                    .get();
 
-            return res;
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyTalonariosDto dto = res.readEntity(GsyTalonariosDto.class);
+
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
 
-    public void edit(GsyTalonariosDto entity) throws Exception {
+    public void restEdit(GsyTalonariosDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getTalId().toString()) // el id del registro a editar
                     .request()
                     .put(Entity.json(entity));
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
@@ -79,13 +86,19 @@ public class GsyTalonarioService extends RESTService {
 
     }
 
-    public GsyTalonariosDto find(long id) throws Exception {
+    public GsyTalonariosDto restFind(long id) throws Exception {
         try {
-            GsyTalonariosDto cu = target
+            Response res = target
                     .path(String.valueOf(id))
                     .request()
-                    .get(GsyTalonariosDto.class);
-            return cu;
+                    .get();
+
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyTalonariosDto dto = res.readEntity(GsyTalonariosDto.class);
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }

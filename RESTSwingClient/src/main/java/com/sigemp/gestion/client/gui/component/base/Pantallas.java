@@ -6,6 +6,7 @@
 package com.sigemp.gestion.client.gui.component.base;
 
 import com.sigemp.gestion.client.gui.sis_config.VentanaPtoVenta;
+import com.sigemp.gestion.client.gui.sis_general.WABMCertificados;
 import com.sigemp.gestion.client.gui.sis_general.WABMGsyProv;
 import com.sigemp.gestion.constants.Sistema;
 
@@ -18,6 +19,7 @@ public enum Pantallas {
     PROVINCIAS(WABMGsyProv.class, 1001, Sistema.GENERAL, PantallaGrupo.TABLAS, "ABM Provincias"),
     PROVINCIAS2(WABMGsyProv.class, 1002, Sistema.GENERAL, PantallaGrupo.TABLAS, "ABM Provincias2"),
     PROVINCIAS3(WABMGsyProv.class, 1003, Sistema.GENERAL, PantallaGrupo.CONSULTAS, "ABM Provincias3"),
+    CERTIFICADOS(WABMCertificados.class, 1005, Sistema.GENERAL, PantallaGrupo.CONSULTAS, "ABM Certificados"),
     PUNTOS_DE_VENTA(VentanaPtoVenta.class, 1004, Sistema.GENERAL, PantallaGrupo.CONFIG, "ABM Puntos de Venta");
     
     private final String des;

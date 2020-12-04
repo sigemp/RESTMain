@@ -25,21 +25,24 @@
             <groupId>com.sigemp.sistem</groupId>
             <artifactId>RESTDtoLib</artifactId>
         </dependency>
+        
         <!-- PERSISTENCIA -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.core</artifactId>
-            <version>2.7.1</version>
+            <version>2.7.7</version>
             <scope>provided</scope>
         </dependency>
        
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.6.4</version>
+            <version>2.7.7</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        
+        
         <!-- JDBC -->
         <dependency>
             <groupId>org.postgresql</groupId>

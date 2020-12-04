@@ -35,6 +35,7 @@ public class RESTService {
         SERVICE_SUCURSAL ("gsysuc"),
         SERVICE_TALONARIOS ("gsytalonarios"),
         SERVICE_CONTADORES ("gsycontadores"),
+        SERVICE_CERTIFICADOS ("gsycertificados"),
         SERVICE_PANTALLA_PTOVTA ("ptovta"),
         
         ;
@@ -83,21 +84,14 @@ public class RESTService {
         return target;
     }
     
-    protected String analize(Response res, String leyenda) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(" ")
-                .append(res.getStatus());
-
-        MultivaluedMap map = res.getMetadata();
-        for (Object m : map.keySet()) {
-            sb.append(m)
-                    .append(" ")
-                    .append(map.get(m))
-                    .append("\r\n");
-        }
-
-        sb.append("Error creando");
-        return sb.toString();
+    public void analizeError(Object entity, MediaType mediaType) throws Exception {
+        throw new Exception("Terminar de analizar el error MediaType" + mediaType.getType());
+    }
+    
+    public void analizeError(Response res) throws Exception {
+        throw new Exception("Terminar de analizar el error MediaType" + res.getMediaType() 
+                + " ErrorCode" + res.getStatus() 
+                + " Path: " + res.getLocation().toASCIIString());
     }
 
     private static URI getBaseURI() {

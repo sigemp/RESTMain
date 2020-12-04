@@ -7,10 +7,6 @@ package com.sigemp.gestion.client.gui.sis_config;
  */
 import com.sigemp.gestion.client.gui.component.SgImage;
 import com.sigemp.gestion.client.gui.component.base.SgJInternalFrame;
-import com.sigemp.gestion.client.services.GsyContadoresService;
-import com.sigemp.gestion.client.services.GsyContadoresTipoService;
-import com.sigemp.gestion.client.services.GsySucService;
-import com.sigemp.gestion.client.services.GsyTalonariosService;
 import com.sigemp.gestion.client.services.ServiceFactory;
 import com.sigemp.common.exception.SgException;
 import com.sigemp.gestion.client.gui.sis_config.form.FormContadores;
@@ -19,26 +15,20 @@ import com.sigemp.gestion.client.services.ventanaPtoVenta.PtoVtaService;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.GsyContadorTipoDto;
 import com.sigemp.gestion.shared.dto.ventanaPtoVenta.PtoVtaDto;
-import com.sigemp.gestion.shared.dto.GsyContadoresDto;
-import com.sigemp.gestion.shared.dto.GsyContadorestiposDto;
-import com.sigemp.gestion.shared.dto.GsyTalonariosDto;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 /**
  *
@@ -46,9 +36,9 @@ import javax.swing.tree.TreePath;
  */
 public class VentanaPtoVenta extends SgJInternalFrame {
 
-    private final GsyContadoresService controladorContadores = ServiceFactory.getGsyContador();
-    private final GsyContadoresTipoService controladorContadoresTipo = ServiceFactory.getGsyContadoresTipo();
-    private final GsyTalonariosService controladorPuntoVenta = ServiceFactory.getGsyTalonarios();
+    //private final GsyContadoresService controladorContadores = ServiceFactory.getGsyContador();
+    //private final GsyContadoresTipoService controladorContadoresTipo = ServiceFactory.getGsyContadoresTipo();
+    //private final GsyTalonariosService controladorPuntoVenta = ServiceFactory.getGsyTalonarios();
     private final PtoVtaService ptovtaService = ServiceFactory.getPtoVtaService();
 
     /**
@@ -63,7 +53,8 @@ public class VentanaPtoVenta extends SgJInternalFrame {
         initComponents();
 
         setIcon(SgImage.PTOVTA);
-        setPreferredSize(new Dimension(519, 421));
+        setPreferredSize(new Dimension(940, 519));
+        setMinimumSize(new Dimension(940, 519));
 
         jb_actualizar.setIcon(SgImage.REGISTROS_ACTUALIZAR.getImage(SgImage.SIZES.S20));
         jb_agregar.setIcon(SgImage.REGISTROS_AGREGAR.getImage(SgImage.SIZES.S20));

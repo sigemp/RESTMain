@@ -5,7 +5,7 @@
  */
 package com.sigemp.server.entity.service.simples;
 
-import com.sigemp.gestion.server.services.GsyParamsREST;
+import com.sigemp.gestion.server.services.automatic.GsyParamsREST;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;

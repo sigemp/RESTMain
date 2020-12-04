@@ -19,6 +19,7 @@
     <class>com.sigemp.gestion.shared.entity.StkArtdescuentos</class>
     <class>com.sigemp.gestion.shared.entity.VtaVta</class>
     <class>com.sigemp.gestion.shared.entity.GsyPers</class>
+    <class>com.sigemp.gestion.shared.entity.GsyCertificados</class>
     <class>com.sigemp.gestion.shared.entity.PvtaTiponegociodtorubro</class>
     <class>com.sigemp.gestion.shared.entity.VtaCobM</class>
     <class>com.sigemp.gestion.shared.entity.StkStk</class>

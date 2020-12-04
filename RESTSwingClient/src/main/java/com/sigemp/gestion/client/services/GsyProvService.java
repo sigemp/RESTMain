@@ -24,24 +24,26 @@ public class GsyProvService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_PROVINCIA.getParam());
 
-    public void create(GsyProvDto entity) throws Exception {
+    public Integer restCreate(GsyProvDto entity) throws Exception {
         try {
             Response res = target
                     .request()
-                    .post(Entity.xml(entity));
+                    .post(Entity.json(entity));
 
-            if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "creando :");
-                throw new Exception(str);
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+
+                analizeError(res);
             }
+            Integer id = res.readEntity(Integer.class);
+
+            return id;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
 
     }
 
-    public void remove(long id) throws Exception {
-
+    public void restRemove(long id) throws Exception {
         try {
             Response res = target
                     .path(String.valueOf(id))
@@ -49,36 +51,40 @@ public class GsyProvService extends RESTService {
                     .delete();
 
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
 
-    public GsyProvDto getNew() throws Exception {
+    public GsyProvDto restNewEntity() throws Exception {
         try {
-            GsyProvDto res = target
+            Response res = target
                     .path("newentity")
-                    .request().get(GsyProvDto.class);
+                    .request()
+                    .get();
 
-            return res;
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyProvDto dto = res.readEntity(GsyProvDto.class);
+
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }
     }
-    
-       public void edit(GsyProvDto entity) throws Exception {
+
+    public void restEdit(GsyProvDto entity) throws Exception {
         try {
             Response res = target
                     .path(entity.getProvId().toString()) // el id del registro a editar
                     .request()
-                    //                    .accept(MediaType.APPLICATION_XML)
-                    .put(Entity.xml(entity));
+                    .put(Entity.json(entity));
             if (res.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-                String str = analize(res, "delete :");
-                throw new Exception(str);
+                analizeError(res);
             }
         } catch (Exception ex) {
             throw new Exception(ex);
@@ -86,7 +92,7 @@ public class GsyProvService extends RESTService {
 
     }
 
-    public PageableWrapper<GsyProvDto> getList(HashMap<String, Object> map, long start, long size) throws Exception {
+    public PageableWrapper<GsyProvDto> restList(HashMap<String, Object> map, long start, long size) throws Exception {
         if (map == null) {
             map = new HashMap<>();
         }
@@ -104,9 +110,11 @@ public class GsyProvService extends RESTService {
 
             // Obtengo la respuesta
             Response res = wtar.request()
-                    //.accept(MediaType.APPLICATION_XML)
-                    //.cookie("JSESSIONID","d235605938768cd6b5abe6e02c74")
                     .get();
+
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
 
             int cnt = getIntFromString(res.getHeaderString("query_count"));
 
@@ -121,21 +129,26 @@ public class GsyProvService extends RESTService {
 
             return dto;
         } catch (ProcessingException e) {
-            throw new Exception("Conexion rechazada\nURL:" + wtar.getUri().toASCIIString()+"\n" + e);
+            throw new Exception("Conexion rechazada\nURL:" + wtar.getUri().toASCIIString() + "\n" + e);
         } catch (Exception ex) {
             throw new Exception(ex);
         }
 
     }
 
-    public GsyProvDto find(long id) throws Exception {
+    public GsyProvDto restFind(long id) throws Exception {
         try {
-            GsyProvDto cu = target
+            Response res = target
                     .path(String.valueOf(id))
                     .request()
-                    //                    .accept(MediaType.APPLICATION_XML)
-                    .get(GsyProvDto.class);
-            return cu;
+                    .get();
+
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
+            GsyProvDto dto = res.readEntity(GsyProvDto.class);
+            return dto;
         } catch (Exception ex) {
             throw new Exception(ex);
         }

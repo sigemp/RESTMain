@@ -47,7 +47,7 @@ import javax.swing.JOptionPane;
 public class FormVtoVta extends javax.swing.JPanel {
 
 //    private final ControladorStkDepositos controladorDepositos = DAOFactory.getDaoStkDepositos();
-    private final GsyTalonarioService controladorTalonarios = ServiceFactory.getGsyTalonario();
+    private final GsyTalonarioService controladorTalonarios = ServiceFactory.getGsyTalonarios();
     private final GsySucService controladorSucService = ServiceFactory.getGsySucService();
     private final StkDepositoService controladorDepositosService = ServiceFactory.getStkDepositoService();
 
@@ -73,7 +73,7 @@ public class FormVtoVta extends javax.swing.JPanel {
         if (id == null) {
             setCurrentRecord(new GsyTalonariosDto(), CRUD.ALTA);
         } else {
-            GsyTalonariosDto talonario = controladorTalonarios.find(id);
+            GsyTalonariosDto talonario = controladorTalonarios.restFind(id);
             setCurrentRecord(talonario, CRUD.MODIFICACION);
             // si no existe , laro error
         }
@@ -151,7 +151,7 @@ public class FormVtoVta extends javax.swing.JPanel {
         SwingUtils.setSelectText(jtDescripcion);
 
         try {
-            List<GsySucDto> list = controladorSucService.getAll();
+            List<GsySucDto> list = controladorSucService.restList();
             jcSucursal.removeAllItems();
             for (GsySucDto s : list) {
                 jcSucursal.addItem(s);
@@ -494,7 +494,7 @@ public class FormVtoVta extends javax.swing.JPanel {
         jcDeposito.removeAllItems();
         GsySucDto suc = (GsySucDto) jcSucursal.getSelectedItem();
         try {
-            List<StkDepositosDto> list = controladorDepositosService.getAll();
+            List<StkDepositosDto> list = controladorDepositosService.restList();
             jcDeposito.removeAllItems();
             for (StkDepositosDto s : list) {
                 if (s.getSucId().getSucId().equals(suc.getSucId())) {

@@ -23,17 +23,18 @@ public class GsySucService extends RESTService {
 
     WebTarget target = getTarget().path(RESTService.ServicePoint.SERVICE_SUCURSAL.getParam());
 
-    public List<GsySucDto> getList() {
-        return new ArrayList<>();
-    }
-
-     public List<GsySucDto> getAll() throws Exception {
+    public List<GsySucDto> restList() throws Exception {
         try {
             Response res = target
                     //.path("ptovtas")
                     .request()
                     .accept(MediaType.APPLICATION_JSON)
                     .get();
+
+            if (res.getStatus() != Response.Status.OK.getStatusCode()) {
+                analizeError(res);
+            }
+
             List<GsySucDto> listCu = (List<GsySucDto>) res.readEntity(new GenericType<List<GsySucDto>>() {
             });
             return listCu;
@@ -42,47 +43,5 @@ public class GsySucService extends RESTService {
 
         }
     }
-     
-    
-//    public PageableWrapper<GsyProv> getList(HashMap<String, Object> map, long start, long size) throws Exception {
-//        try {
-//            if (map == null) {
-//                map = new HashMap<>();
-//            }
-//
-//            WebTarget wtar = target.path(ParamSite.PATH_GSY_PROV_LIST.getParam());
-//
-//            wtar = wtar.queryParam("start", start);
-//            wtar = wtar.queryParam("size", size);
-//
-//            String des = (String) map.get("des");
-//            if (des != null && des.length() > 0) {
-//                wtar = wtar.queryParam("des", des);
-//            }
-//
-//            // Obtengo la respuesta
-//            Response res = wtar.request().accept(MediaType.APPLICATION_XML)
-//                    //.cookie("JSESSIONID","d235605938768cd6b5abe6e02c74")
-//                    .get();
-//
-//            int cnt = getIntFromString(res.getHeaderString("query_count"));
-//
-//            // saco informacion de pageable del header
-//            PageableWrapper<GsyProv> dto = getPageableCount(cnt);
-//
-//            // Obtengo la lista de la respuesta
-//            List<GsyProv> listCu = (List<GsyProv>) res.readEntity(new GenericType<List<GsyProv>>() {
-//            });
-//
-//            dto.setList(listCu);
-//
-//            return dto;
-//        } catch (ProcessingException e) {
-//            throw new Exception("Conexion rechazada\n" + e);
-//        } catch (Exception ex) {
-//            throw new Exception(ex);
-//        }
-//
-//    }
 
 }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author cristian
  */
-class DateUtils {
+public class DateUtils {
 
     private static final Logger LOG = Logger.getLogger(DateUtils.class.getName());
 
