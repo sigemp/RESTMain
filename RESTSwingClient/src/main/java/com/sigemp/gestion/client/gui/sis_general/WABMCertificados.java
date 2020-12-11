@@ -248,11 +248,11 @@ public class WABMCertificados extends SgJInternalFrame implements PageableInterf
         jb_buscar = new javax.swing.JButton();
         jPanelPageableContent = new javax.swing.JPanel();
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.setLayout(new java.awt.FlowLayout(0));
 
         jb_agregar.setText("Agregar");
         jb_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +311,7 @@ public class WABMCertificados extends SgJInternalFrame implements PageableInterf
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        jPanelPageableContent.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelPageableContent.setLayout(new java.awt.FlowLayout(0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

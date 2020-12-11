@@ -707,4 +707,20 @@ public class FormContadores extends SgForm {
             me("Error", ex);
         }
     }
+    
+    public void setId(Integer contadorId,Integer ptoVtaId) {
+        try {
+            if (contadorId == null) {
+                GsyContadoresDto dto = gsyContadorService.restNewEntity();
+                dto.setTalId(ptoVtaId);
+                setCurrentRecord(dto, CRUD.ALTA);
+            } else {
+                GsyContadoresDto dto = gsyContadorService.restFind(contadorId);
+                setCurrentRecord(dto, CRUD.MODIFICACION);
+            }
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            me("Error", ex);
+        }
+    }
 }

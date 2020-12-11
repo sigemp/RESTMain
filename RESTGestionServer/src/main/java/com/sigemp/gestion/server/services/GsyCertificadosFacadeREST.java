@@ -117,7 +117,7 @@ public class GsyCertificadosFacadeREST extends AbstractFacade<GsyCertificados> {
             if (entity == null) {
                 return responseNotFound(Response.Status.NOT_FOUND, "No Existe");
             }
-            GsyCertificadosDto dto = Convert.toDto(entity);
+            GsyCertificadosDto dto = new Convert(em).toDto(entity);
             return Response.ok().entity(dto).build();
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, null, ex);
@@ -130,7 +130,7 @@ public class GsyCertificadosFacadeREST extends AbstractFacade<GsyCertificados> {
         try {
             List<GsyCertificadosDto> listDto = new ArrayList<>();
             super.findAll().stream().forEach(e -> {
-                listDto.add(Convert.toDto(e));
+                listDto.add(new Convert(em).toDto(e));
             });
 
             GenericEntity<List<GsyCertificadosDto>> genericlistDto = new GenericEntity<List<GsyCertificadosDto>>(listDto) {
@@ -263,7 +263,7 @@ public class GsyCertificadosFacadeREST extends AbstractFacade<GsyCertificados> {
 
             List<GsyCertificados> listEntity = (List<GsyCertificados>) q.getResultList();
 
-            List<ListCertificadoDto> listDto = Convert.toDto(listEntity);
+            List<ListCertificadoDto> listDto = new Convert(em).toDto(listEntity);
 
             GenericEntity<List<ListCertificadoDto>> genericDto
                     = new GenericEntity<List<ListCertificadoDto>>(listDto) {
@@ -288,7 +288,7 @@ public class GsyCertificadosFacadeREST extends AbstractFacade<GsyCertificados> {
             if (entity == null) {
                 return responseNotFound(Response.Status.NOT_FOUND, "No Existe");
             }
-            ListCertificadoDto dto = Convert.toDtoView(super.find(id));
+            ListCertificadoDto dto = new Convert(em).toDtoView(super.find(id));
             return Response.ok().entity(dto).build();
         } catch (Exception e) {
             return responseError(Response.Status.BAD_REQUEST, "Error");

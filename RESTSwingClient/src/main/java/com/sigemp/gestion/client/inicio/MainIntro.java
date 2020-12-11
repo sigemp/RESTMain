@@ -5,6 +5,7 @@
  */
 package com.sigemp.gestion.client.inicio;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.sigemp.gestion.client.gui.component.SgImage;
 import com.sigemp.gestion.client.gui.component.base.LoginForm;
 import com.sigemp.gestion.client.gui.component.base.Pantallas;
@@ -103,12 +104,13 @@ public class MainIntro extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainIntro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+////        try {
+////            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+////        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+////            java.util.logging.Logger.getLogger(MainIntro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+////        }
 
+        FlatDarkLaf.install();
         // Arranco la Pantalla Principal
         SwingUtilities.invokeLater(() -> {
             new MainIntro().setVisible(true);
