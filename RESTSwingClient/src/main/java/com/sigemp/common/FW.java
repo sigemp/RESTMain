@@ -30,6 +30,7 @@ public class FW {
             Object o = p.getPantalla().newInstance();
             if (o != null && o instanceof SgJInternalFrame) {
                 SgJInternalFrame sj = (SgJInternalFrame) o;
+                sj.setTitle(p.getDescripcion());
                 sj.init();
                 dp.add(sj);
                 sj.setVisible(true);

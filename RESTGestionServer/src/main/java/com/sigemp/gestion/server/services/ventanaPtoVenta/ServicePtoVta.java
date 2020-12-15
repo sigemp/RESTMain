@@ -113,6 +113,7 @@ public class ServicePtoVta extends AbstractFacade<GsyTalonarios> {
             PtoVtaDto dto = new PtoVtaDto();
             dto.setDes(gsyTalonarios.getDes());
             dto.setPtoVta(gsyTalonarios.getTalId());
+            
 
             dto.setContadores(contadorList(gsyTalonarios.getTalId()));
 

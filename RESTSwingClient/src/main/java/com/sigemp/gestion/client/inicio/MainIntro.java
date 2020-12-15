@@ -15,6 +15,7 @@ import com.sigemp.gestion.constants.Sistema;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -104,13 +105,18 @@ public class MainIntro extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-////        try {
-////            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-////        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-////            java.util.logging.Logger.getLogger(MainIntro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-////        }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.getDefaults().put("InternalFrame.closeIcon", javax.swing.plaf.metal.MetalIconFactory.getInternalFrameCloseIcon(26));
+            UIManager.getDefaults().put("InternalFrame.closeIcon", javax.swing.plaf.metal.MetalIconFactory.getInternalFrameCloseIcon(18));
+            UIManager.getDefaults().put("InternalFrame.maximizeIcon", javax.swing.plaf.metal.MetalIconFactory.getInternalFrameMaximizeIcon(18));
+            UIManager.getDefaults().put("InternalFrame.minimizeIcon", javax.swing.plaf.metal.MetalIconFactory.getInternalFrameMinimizeIcon(18));
+            UIManager.getDefaults().put("InternalFrame.titleFont", new Font("Dialog", Font.BOLD, 12));
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainIntro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
 
-        FlatDarkLaf.install();
+////        FlatDarkLaf.install();
         // Arranco la Pantalla Principal
         SwingUtilities.invokeLater(() -> {
             new MainIntro().setVisible(true);
@@ -165,7 +171,7 @@ public class MainIntro extends javax.swing.JFrame {
 
                 JMenuItem menuItem = new JMenuItem(p.getDescripcion());
                 menuItem.addActionListener((ActionEvent e) -> {
-                    FW.start(dp,p);
+                    FW.start(dp, p);
                 });
                 menuGrupo.add(menuItem);
 

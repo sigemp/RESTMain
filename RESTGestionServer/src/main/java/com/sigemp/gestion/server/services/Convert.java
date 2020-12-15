@@ -25,7 +25,7 @@ import javax.persistence.EntityManager;
 public class Convert {
 
     private final EntityManager em;
-    
+
     public Convert(EntityManager em) {
         this.em = em;
     }
@@ -88,12 +88,9 @@ public class Convert {
         entity.setNroactual(dto.getNroactual());
         entity.setPermiteCambioFecha(dto.getPermiteCambioFecha());
         entity.setTipoContador(dto.getTipoContador());
-        
 
         return entity;
     }
-    
-    
 
     public GsyContadoresDto toDto(GsyContadores entity) {
         GsyContadoresDto dto = new GsyContadoresDto();
@@ -120,8 +117,32 @@ public class Convert {
 
     public GsyTalonariosDto toDto(GsyTalonarios entity) {
         GsyTalonariosDto dto = new GsyTalonariosDto();
-        //dto.setDepoId(depoId);
+
+        dto.setDepoId(entity.getDepoId().getDepoId());
+        dto.setDes(entity.getDes());
+        dto.setEstado(entity.getEstado());
+        dto.setFeTa(entity.getFeTa());
+        dto.setIfbaudios(entity.getIfbaudios());
+        dto.setIfmarca(dto.getIfmarca());
+        dto.setIfmodelo(entity.getIfmodelo());
+        dto.setIfpuerto(entity.getIfpuerto());
+        dto.setTalId(entity.getTalId());
+
         return dto;
+    }
+
+    public GsyTalonarios toEntity(GsyTalonariosDto dto) {
+        GsyTalonarios entity = new GsyTalonarios();
+        //entity.setGsyContadoresCollection(gsyContadoresCollection);
+        entity.setDes(dto.getDes());
+        entity.setEstado(dto.getEstado());
+        entity.setFeTa(dto.getFeTa());
+        entity.setIfbaudios(dto.getIfbaudios());
+        entity.setIfmarca(dto.getIfmarca());
+        entity.setIfmodelo(dto.getIfmodelo());
+        entity.setTalId(dto.getTalId());
+        return entity;
+
     }
 
 }

@@ -25,7 +25,7 @@ public class GsyTalonariosDto implements Serializable {
     private String ifmarca;
     private String ifmodelo;
     private Integer ifpuerto;
-    private StkDepositosDto depoId;
+    private Integer depoId;
 
     public GsyTalonariosDto() {
     }
@@ -104,11 +104,11 @@ public class GsyTalonariosDto implements Serializable {
         this.ifpuerto = ifpuerto;
     }
 
-    public StkDepositosDto getDepoId() {
+    public Integer getDepoId() {
         return depoId;
     }
 
-    public void setDepoId(StkDepositosDto depoId) {
+    public void setDepoId(Integer depoId) {
         this.depoId = depoId;
     }
 

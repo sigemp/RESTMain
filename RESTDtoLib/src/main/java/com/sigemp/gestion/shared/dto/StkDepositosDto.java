@@ -21,7 +21,7 @@ public class StkDepositosDto implements Serializable {
     private Integer depoId;
     private String des;
     private boolean estado;
-    private GsySucDto sucId;
+    private Integer sucId;
 
     public StkDepositosDto() {
     }
@@ -60,11 +60,11 @@ public class StkDepositosDto implements Serializable {
         this.estado = estado;
     }
 
-    public GsySucDto getSucId() {
+    public Integer getSucId() {
         return sucId;
     }
 
-    public void setSucId(GsySucDto sucId) {
+    public void setSucId(Integer sucId) {
         this.sucId = sucId;
     }
 

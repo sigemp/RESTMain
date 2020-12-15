@@ -105,12 +105,12 @@ public class FormVtoVta extends javax.swing.JPanel {
 
         jtDescripcion.setText(currentRecord.getDes());
 
-        StkDepositosDto dep = currentRecord.getDepoId();
-        if (dep != null) {
-            GsySucDto suc = dep.getSucId();
-            jcSucursal.setSelectedItem(suc);
+        Integer depoId = currentRecord.getDepoId();
+        if (depoId != null) {
+            ////
             actualizarDepositos();
-            jcDeposito.setSelectedItem(dep);
+            selectDeposito(depoId);
+
         }
 
         if (currentRecord.getTalId() == null) {
@@ -160,38 +160,6 @@ public class FormVtoVta extends javax.swing.JPanel {
             Logger.getLogger(FormVtoVta.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-
-//        } catch (SgException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
     }
 
     /**
@@ -497,7 +465,7 @@ public class FormVtoVta extends javax.swing.JPanel {
             List<StkDepositosDto> list = controladorDepositosService.restList();
             jcDeposito.removeAllItems();
             for (StkDepositosDto s : list) {
-                if (s.getSucId().getSucId().equals(suc.getSucId())) {
+                if (s.getSucId().equals(suc.getSucId())) {
                     jcDeposito.addItem(s);
                 }
             }
@@ -511,7 +479,7 @@ public class FormVtoVta extends javax.swing.JPanel {
         wcurrentRecord.setTrPuerto((Puertos) jcPuertos.getSelectedItem());
 
         StkDepositosDto dep = (StkDepositosDto) jcDeposito.getSelectedItem();
-        currentRecord.setDepoId(dep);
+        currentRecord.setDepoId(dep.getDepoId());
 
         currentRecord.setDes(jtDescripcion.getText());
         currentRecord.setEstado(jCheckBox1.isSelected());
@@ -556,4 +524,28 @@ public class FormVtoVta extends javax.swing.JPanel {
 //        setCurrentRecord(tal);
     }
 
+    private void selectSucursal(Integer sucId) {
+        int size = jcSucursal.getModel().getSize();
+        for (int x = 0; x < size; x++) {
+            GsySucDto sucDto = (GsySucDto) jcSucursal.getModel().getElementAt(x);
+            if (sucDto.getSucId().equals(sucId)) {
+                jcSucursal.setSelectedIndex(x);
+                break;
+            }
+        }
+    }
+
+    private void selectDeposito(Integer depoId) {
+
+        int size = jcDeposito.getModel().getSize();
+        for (int x = 0; x < size; x++) {
+            StkDepositosDto sucDto = (StkDepositosDto) jcSucursal.getModel().getElementAt(x);
+            if (sucDto.getDepoId().equals(depoId)) {
+                selectSucursal(sucDto.getSucId());
+                jcDeposito.setSelectedIndex(x);
+                break;
+            }
+        }
+
+    }
 }
