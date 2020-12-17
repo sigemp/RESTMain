@@ -60,8 +60,9 @@ public class WABMCertificados extends SgJInternalFrame implements PageableInterf
         String[] cols = {ColumName.ID.getName(),
             ColumName.DESCRIPCION.getName(),
             ColumName.ACTIVO.getName(),
-            ColumName.FEC.getName(),
-            ColumName.TIPO.getName()};
+            ColumName.TIPO.getName(),
+            ColumName.FEC.getName()
+        };
 
         dm = new GsyCertificadosModel(cols);
         dm.setTablaAsociada(jTable1);
